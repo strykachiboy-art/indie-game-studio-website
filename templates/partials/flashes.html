@@ -1,0 +1,26 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="mx-auto max-w-6xl px-6 pt-6">
+    <div class="flex flex-col gap-2">
+      {% for category, message in messages %}
+      {% set styles = {
+        'success': 'border-accent/40 bg-accent/10 text-accent',
+        'error': 'border-red-500/40 bg-red-500/10 text-red-300',
+        'warning': 'border-yellow-500/40 bg-yellow-500/10 text-yellow-200'
+      } %}
+      <div
+        class="flex items-center justify-between rounded-lg border px-4 py-3 text-sm {{ styles.get(category, 'border-line bg-surface text-cream') }}"
+      >
+        <span>{{ message }}</span>
+        <button
+          type="button"
+          class="ml-4 text-lg leading-none opacity-70 hover:opacity-100"
+          onclick="this.parentElement.remove()"
+          aria-label="Dismiss"
+        >&times;</button>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+{% endwith %}

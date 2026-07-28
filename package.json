@@ -1,0 +1,22 @@
+{
+  "name": "studio_site",
+  "version": "1.0.0",
+  "description": "A small full-stack website for a fictional indie game studio, built with **Flask + Jinja2 + Tailwind CSS + PostgreSQL**.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "npm run build:css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./static/css/output.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ./static/css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}

@@ -1,0 +1,21 @@
+/* Small enhancements on top of Tailwind (loaded via CDN in base.html). */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Nicer scrollbar on the dark theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b10;
+}
+::-webkit-scrollbar-thumb {
+  background: #252838;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #65a30d;
+}

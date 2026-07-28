@@ -1,0 +1,116 @@
+<header class="sticky top-0 z-50 border-b border-line bg-ink/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="{{ url_for('main.index') }}"
+      class="inline-flex items-center gap-3 font-display text-xl font-bold tracking-tight text-cream">
+      <img src="{{ url_for('static', filename='images/stryka_logo.svg') }}" alt="StrykaMax" class="h-8" />
+    </a>
+
+    {% set links = [
+    ('main.games', 'Games'),
+    ('main.about', 'About'),
+    ('main.devlog', 'Devlog'),
+    ('main.contact', 'Contact')
+    ] %}
+
+    <!-- Desktop links -->
+    <div class="hidden items-center gap-1 md:flex">
+      {% for endpoint, label in links %}
+      <a href="{{ url_for(endpoint) }}" class="relative rounded-md px-3 py-2 text-sm font-medium transition-colors
+          {% if request.endpoint == endpoint %}text-accent{% else %}text-muted hover:text-accent{% endif %}">
+        {{ label }}
+        {% if request.endpoint == endpoint %}
+        <span class="absolute inset-x-3 -bottom-[1px] h-0.5 rounded-full bg-accent"></span>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Desktop auth -->
+    <div class="hidden items-center gap-3 md:flex">
+      {% if current_user.is_authenticated %}
+      {% if current_user.is_admin %}
+      <a href="{{ url_for('admin.dashboard') }}"
+        class="rounded-md px-3 py-2 text-sm font-medium text-accent hover:text-accent-soft">Dashboard</a>
+      {% endif %}
+      <div class="flex items-center gap-2 border-l border-line pl-3">
+        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-surface text-xs font-semibold text-cream">
+          {{ current_user.username[0]|upper }}
+        </span>
+        <span class="text-sm text-muted">{{ current_user.username }}</span>
+      </div>
+      <a href="{{ url_for('auth.logout') }}"
+        class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent">Log
+        out</a>
+      {% else %}
+      <a href="{{ url_for('auth.login') }}"
+        class="rounded-md px-3 py-2 text-sm font-medium text-muted hover:text-accent">Log in</a>
+      <a href="{{ url_for('auth.register') }}"
+        class="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink transition hover:bg-accent-soft">Sign
+        up</a>
+      {% endif %}
+    </div>
+
+    <!-- Hamburger -->
+    <button id="nav-toggle"
+      class="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
+      aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-drawer">
+      <span class="sr-only">Menu</span>
+      <div class="relative h-4 w-5">
+        <span
+          class="bar absolute left-0 top-0 h-0.5 w-5 rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
+        <span
+          class="bar absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded-full bg-white transition-all duration-200 ease-in"></span>
+        <span
+          class="bar absolute left-0 bottom-0 h-0.5 w-5 rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
+      </div>
+    </button>
+  </nav>
+</header>
+
+<!-- Backdrop -->
+<div id="nav-backdrop"
+  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 md:hidden">
+</div>
+
+<!-- Slide-in drawer -->
+<div id="nav-drawer"
+  class="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] translate-x-full border-l border-line bg-ink shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] md:hidden"
+  aria-hidden="true">
+  <div class="flex h-full flex-col px-6 pb-8 pt-24">
+    <div class="flex flex-col gap-1">
+      {% for endpoint, label in links %}
+      <a href="{{ url_for(endpoint) }}"
+        class="rounded-md px-3 py-3 text-base font-medium transition-colors
+          {% if request.endpoint == endpoint %}text-accent{% else %}text-muted hover:text-accent hover:bg-surface{% endif %}">
+        {{ label }}
+      </a>
+      {% endfor %}
+    </div>
+
+    <hr class="my-4 border-line" />
+
+    <div class="flex flex-col gap-2">
+      {% if current_user.is_authenticated %}
+      <div class="mb-2 flex items-center gap-3 px-3">
+        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-surface text-sm font-semibold text-cream">
+          {{ current_user.username[0]|upper }}
+        </span>
+        <span class="text-sm text-cream">{{ current_user.username }}</span>
+      </div>
+      {% if current_user.is_admin %}
+      <a href="{{ url_for('admin.dashboard') }}"
+        class="rounded-md px-3 py-3 text-base font-medium text-accent hover:bg-surface">Dashboard</a>
+      {% endif %}
+      <a href="{{ url_for('auth.logout') }}"
+        class="mt-2 inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-cream transition hover:border-accent hover:text-accent">Log
+        out</a>
+      {% else %}
+      <a href="{{ url_for('auth.login') }}"
+        class="rounded-md px-3 py-3 text-base font-medium text-muted hover:text-accent">Log in</a>
+      <a href="{{ url_for('auth.register') }}"
+        class="mt-2 inline-flex items-center justify-center rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-ink transition hover:bg-accent-soft">Sign
+        up</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

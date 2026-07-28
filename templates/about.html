@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}About — StrykaMax Studio{% endblock %}
+
+{% block content %}
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Our story</p>
+        <h1 class="mt-2 font-display text-4xl font-bold sm:text-5xl">About the studio</h1>
+        <p class="mt-6 max-w-2xl leading-relaxed text-muted">
+            Founded in a cramped apartment in 2019, we've stayed small on purpose —
+            close-knit enough that every pixel and note gets the attention it deserves.
+        </p>
+    </div>
+</section>
+
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+        <h2 class="font-display text-3xl font-bold">What we believe</h2>
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+            {% for item in [
+            {'t': 'Handmade craft', 'd': 'Every asset is made in-house, from sprite work to the last synth stab.'},
+            {'t': 'Player-first', 'd': 'We prototype fast and playtest often. If it is not fun, it does not ship.'},
+            {'t': 'Bold worlds', 'd': 'Strange settings, strong art direction, and stories that stick.'},
+            {'t': 'Built to last', 'd': 'We support our games long after launch with updates and community events.'}
+            ] %}
+            <div class="rounded-2xl border border-line bg-surface p-6">
+                <h3 class="font-display text-lg font-semibold text-accent">{{ item.t }}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{{ item.d }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Milestones</p>
+        <h2 class="mt-2 font-display text-3xl font-bold">Our journey</h2>
+        <div class="mt-10 grid gap-6 md:grid-cols-4">
+            {% for step in [
+            {'y': '2019', 't': 'Studio founded', 'd': 'Two people, one laptop, zero budget.'},
+            {'y': '2021', 't': 'First release', 'd': 'Neon Drift launches to a small but loud community.'},
+            {'y': '2023', 't': 'Team grows', 'd': 'We bring on artists and sound design help.'},
+            {'y': '2026', 't': 'Four games strong', 'd': 'Still small, still handmade, still obsessed.'}
+            ] %}
+            <div class="rounded-2xl border border-line bg-surface p-6">
+                <p class="font-display text-2xl font-bold text-accent">{{ step.y }}</p>
+                <h3 class="mt-2 text-sm font-semibold text-cream">{{ step.t }}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{{ step.d }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+        <h2 class="font-display text-3xl font-bold">The people behind it</h2>
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {% for member in [
+            {'n': 'Founder & Lead Dev', 'r': 'Code, systems, and way too much coffee.'},
+            {'n': 'Art Director', 'r': 'Sprites, palettes, and the studio\'s visual voice.'},
+            {'n': 'Sound Designer', 'r': 'Every synth stab and footstep you hear.'},
+            {'n': 'Community Lead', 'r': 'Keeps players in the loop and devs sane.'}
+            ] %}
+            <div class="rounded-2xl border border-line bg-surface p-6 text-center">
+                <div class="mx-auto h-16 w-16 rounded-full bg-ink"></div>
+                <h3 class="mt-4 font-display text-sm font-semibold text-cream">{{ member.n }}</h3>
+                <p class="mt-1 text-xs leading-relaxed text-muted">{{ member.r }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="mx-auto max-w-4xl px-6 py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Questions</p>
+        <h2 class="mt-2 font-display text-3xl font-bold">Frequently asked</h2>
+        <div class="mt-10 divide-y divide-line rounded-2xl border border-line bg-surface">
+            {% for faq in [
+            {'q': 'Are you hiring?', 'a': 'Not actively, but we always want to hear from talented folks — reach out via the contact page.'},
+            {'q': 'Do you take publishing deals?', 'a': 'We evaluate case by case. Tell us about your game on the contact page.'},
+            {'q': 'What engines do you use?', 'a': 'A mix, depending on the project — we pick what suits the game, not the trend.'}
+            ] %}
+            <details class="group p-6">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <h3 class="font-display text-base font-semibold text-cream">{{ faq.q }}</h3>
+                    <span
+                        class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line text-accent transition group-open:rotate-45">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                    </span>
+                </summary>
+                <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted">{{ faq.a }}</p>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-ink">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}StrykaMax Studio{% endblock %}</title>
+  <meta name="description" content="StrykaMax is an indie game studio crafting bold, handmade worlds." />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+</head>
+
+<body class="min-h-screen bg-ink font-sans text-cream antialiased">
+  {% include "partials/navbar.html" %}
+
+  <main>
+    {% include "partials/flashes.html" %}
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block footer %}
+  <footer class="border-t border-line bg-surface">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted sm:flex-row">
+      <p class="flex items-center gap-3">
+        <img src="{{ url_for('static', filename='images/stryka_logo.svg') }}" alt="StrykaMax" class="h-8" />
+      </p>
+      <p>&copy; {{ 2026 }} StrykaMax Studio. Made with caffeine and pixels.</p>
+    </div>
+  </footer>
+  {% endblock %}
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

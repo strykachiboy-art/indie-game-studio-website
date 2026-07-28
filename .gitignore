@@ -1,0 +1,23 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.env.*
+venv/
+env/
+.venv/
+instance/
+
+# Vercel & Sandbox internal files
+.vercel/
+.snowflake/
+.v0-trash/
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# Node & Build Outputs
+node_modules/
+.DS_Store
+*.log

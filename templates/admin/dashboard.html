@@ -1,0 +1,63 @@
+{% extends "admin/base_admin.html" %}
+{% block title %}Admin — Overview{% endblock %}
+
+{% block admin_content %}
+<p class="text-xs font-semibold uppercase tracking-wider text-ember">Dashboard</p>
+<h1 class="mt-2 font-display text-2xl font-bold">Overview</h1>
+<p class="mt-1 text-sm text-muted">Studio stats at a glance.</p>
+
+<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {% set cards = [
+  ('Total users', stats.users, stats.admins ~ ' admins'),
+  ('Blog posts', stats.posts, stats.published ~ ' published'),
+  ('Messages', stats.messages, stats.unread ~ ' unread')
+  ] %}
+  {% for label, value, sub in cards %}
+  <div class="rounded-2xl border border-line bg-surface p-6">
+    <p class="text-sm text-muted">{{ label }}</p>
+    <p class="mt-2 font-display text-4xl font-bold text-accent">{{ value }}</p>
+    <p class="mt-1 text-xs text-muted">{{ sub }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="mt-8 grid gap-6 lg:grid-cols-2">
+  <div class="rounded-2xl border border-line bg-surface p-6">
+    <h2 class="font-display text-lg font-semibold">Recent messages</h2>
+    <ul class="mt-4 divide-y divide-line">
+      {% for m in recent_messages %}
+      <li class="flex items-center justify-between py-3">
+        <div class="min-w-0">
+          <p class="truncate text-sm font-medium text-cream">{{ m.name }}</p>
+          <p class="truncate text-xs text-muted">{{ m.body }}</p>
+        </div>
+        {% if not m.is_read %}
+        <span class="ml-3 shrink-0 rounded-full bg-ember/20 px-2 py-0.5 text-xs text-ember">new</span>
+        {% endif %}
+      </li>
+      {% else %}
+      <li class="py-3 text-sm text-muted">No messages yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="rounded-2xl border border-line bg-surface p-6">
+    <h2 class="font-display text-lg font-semibold">Newest users</h2>
+    <ul class="mt-4 divide-y divide-line">
+      {% for u in recent_users %}
+      <li class="flex items-center justify-between py-3">
+        <div class="min-w-0">
+          <p class="truncate text-sm font-medium text-cream">{{ u.username }}</p>
+          <p class="truncate text-xs text-muted">{{ u.email }}</p>
+        </div>
+        {% if u.is_admin %}
+        <span class="ml-3 shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">admin</span>
+        {% endif %}
+      </li>
+      {% else %}
+      <li class="py-3 text-sm text-muted">No users yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

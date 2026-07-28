@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Log in — StrykaMax{% endblock %}
+
+{% block content %}
+<section class="mx-auto flex max-w-md flex-col px-6 py-20">
+  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Account</p>
+  <h1 class="mt-2 font-display text-3xl font-bold">Welcome back</h1>
+  <p class="mt-2 text-muted">Log in to your StrykaMax account.</p>
+
+  <form method="POST" class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+    {{ form.hidden_tag() }}
+    <div>
+      <label for="email" class="mb-1 block text-sm text-muted">Email</label>
+      {{ form.email(id="email", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="you@example.com") }}
+    </div>
+    <div>
+      <label for="password" class="mb-1 block text-sm text-muted">Password</label>
+      {{ form.password(id="password", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="••••••••") }}
+    </div>
+    <label class="flex items-center gap-2 text-sm text-muted">
+      {{ form.remember(class="h-4 w-4 rounded border-line bg-ink accent-accent") }}
+      Remember me
+    </label>
+    {{ form.submit(class="rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition hover:bg-accent-soft
+    cursor-pointer") }}
+  </form>
+
+  <p class="mt-6 text-center text-sm text-muted">
+    No account?
+    <a href="{{ url_for('auth.register') }}" class="font-medium text-accent hover:underline">Create one</a>
+  </p>
+</section>
+{% endblock %}

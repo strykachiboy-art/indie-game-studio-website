@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Sign up — StrykaMax{% endblock %}
+
+{% block content %}
+<section class="mx-auto flex max-w-md flex-col px-6 py-20">
+  <p class="text-xs font-semibold uppercase tracking-wider text-accent">Account</p>
+  <h1 class="mt-2 font-display text-3xl font-bold">Create your account</h1>
+  <p class="mt-2 text-muted">Join the StrykaMax community.</p>
+
+  <form method="POST" class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+    {{ form.hidden_tag() }}
+    <div>
+      <label for="username" class="mb-1 block text-sm text-muted">Username</label>
+      {{ form.username(id="username", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="playername") }}
+    </div>
+    <div>
+      <label for="email" class="mb-1 block text-sm text-muted">Email</label>
+      {{ form.email(id="email", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="you@example.com") }}
+    </div>
+    <div>
+      <label for="password" class="mb-1 block text-sm text-muted">Password</label>
+      {{ form.password(id="password", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="At least 8 characters") }}
+    </div>
+    <div>
+      <label for="confirm" class="mb-1 block text-sm text-muted">Confirm password</label>
+      {{ form.confirm(id="confirm", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+      placeholder-muted focus:border-accent focus:outline-none", placeholder="Repeat password") }}
+    </div>
+    {{ form.submit(class="rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition hover:bg-accent-soft
+    cursor-pointer") }}
+  </form>
+
+  <p class="mt-6 text-center text-sm text-muted">
+    Already have an account?
+    <a href="{{ url_for('auth.login') }}" class="font-medium text-accent hover:underline">Log in</a>
+  </p>
+</section>
+{% endblock %}
