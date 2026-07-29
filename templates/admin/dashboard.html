@@ -22,17 +22,17 @@
 </div>
 
 <div class="mt-8 grid gap-6 lg:grid-cols-2">
-  <div class="rounded-2xl border border-line bg-surface p-6">
+  <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6 overflow-hidden">
     <h2 class="font-display text-lg font-semibold">Recent messages</h2>
     <ul class="mt-4 divide-y divide-line">
       {% for m in recent_messages %}
-      <li class="flex items-center justify-between py-3">
-        <div class="min-w-0">
+      <li class="flex items-start justify-between gap-3 py-3">
+        <div class="min-w-0 flex-1">
           <p class="truncate text-sm font-medium text-cream">{{ m.name }}</p>
-          <p class="truncate text-xs text-muted">{{ m.body }}</p>
+          <p class="break-words text-xs text-muted line-clamp-2">{{ m.body }}</p>
         </div>
         {% if not m.is_read %}
-        <span class="ml-3 shrink-0 rounded-full bg-ember/20 px-2 py-0.5 text-xs text-ember">new</span>
+        <span class="shrink-0 rounded-full bg-ember/20 px-2 py-0.5 text-xs text-ember">new</span>
         {% endif %}
       </li>
       {% else %}
@@ -41,17 +41,17 @@
     </ul>
   </div>
 
-  <div class="rounded-2xl border border-line bg-surface p-6">
+  <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6 overflow-hidden">
     <h2 class="font-display text-lg font-semibold">Newest users</h2>
     <ul class="mt-4 divide-y divide-line">
       {% for u in recent_users %}
-      <li class="flex items-center justify-between py-3">
-        <div class="min-w-0">
+      <li class="flex items-center justify-between gap-3 py-3">
+        <div class="min-w-0 flex-1">
           <p class="truncate text-sm font-medium text-cream">{{ u.username }}</p>
           <p class="truncate text-xs text-muted">{{ u.email }}</p>
         </div>
         {% if u.is_admin %}
-        <span class="ml-3 shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">admin</span>
+        <span class="shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">admin</span>
         {% endif %}
       </li>
       {% else %}
