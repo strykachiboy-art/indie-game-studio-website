@@ -2,12 +2,12 @@
 {% block title %}Sign up — StrykaMax{% endblock %}
 
 {% block content %}
-<section class="mx-auto flex max-w-md flex-col px-6 py-20">
+<section class="mx-auto flex max-w-md flex-col px-6 py-12 sm:py-20">
   <p class="text-xs font-semibold uppercase tracking-wider text-accent">Account</p>
   <h1 class="mt-2 font-display text-3xl font-bold">Create your account</h1>
   <p class="mt-2 text-muted">Join the StrykaMax community.</p>
 
-  <form method="POST" class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-6 sm:p-8">
+  <form method="POST" class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-5 sm:p-8">
     {{ form.hidden_tag() }}
     <div>
       <label for="username" class="mb-1 block text-sm text-muted">Username</label>
@@ -29,8 +29,8 @@
       {{ form.confirm(id="confirm", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
       placeholder-muted focus:border-accent focus:outline-none", placeholder="Repeat password") }}
     </div>
-    {{ form.submit(class="rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition hover:bg-accent-soft
-    cursor-pointer") }}
+    {{ form.submit(class="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition
+    hover:bg-accent-soft cursor-pointer") }}
   </form>
 
   <p class="mt-6 text-center text-sm text-muted">

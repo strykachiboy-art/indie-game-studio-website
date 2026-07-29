@@ -2,12 +2,12 @@
 {% block title %}Not found — StrykaMax{% endblock %}
 
 {% block content %}
-<section class="mx-auto max-w-2xl px-6 py-32 text-center">
-  <p class="font-display text-6xl font-bold text-accent">404</p>
+<section class="mx-auto max-w-2xl px-6 py-16 text-center sm:py-32">
+  <p class="font-display text-5xl font-bold text-accent sm:text-6xl">404</p>
   <h1 class="mt-4 font-display text-2xl font-bold">Page not found</h1>
   <p class="mt-2 text-muted">This level doesn't exist. Let's get you back home.</p>
   <a href="{{ url_for('main.index') }}"
-     class="mt-8 inline-block rounded-lg bg-accent px-6 py-3 font-semibold text-ink hover:bg-accent-soft">
+    class="mt-8 inline-block w-full rounded-lg bg-accent px-6 py-3 font-semibold text-ink hover:bg-accent-soft sm:w-auto">
     Back to home
   </a>
 </section>

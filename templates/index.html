@@ -6,14 +6,14 @@
   <div class="pointer-events-none absolute inset-0 opacity-30"
     style="background-image: radial-gradient(circle at 20% 20%, #a3e63533, transparent 40%), radial-gradient(circle at 80% 0%, #ff8a5c22, transparent 35%);">
   </div>
-  <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:py-28">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 px-6 py-14 sm:py-20 md:grid-cols-2 md:gap-10 md:py-28">
     <div>
       <span
         class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-accent">
         <span class="h-2 w-2 rounded-full bg-accent"></span>
         Indie game studio
       </span>
-      <h1 class="mt-6 font-display text-4xl font-bold leading-tight text-balance sm:text-5xl md:text-6xl">
+      <h1 class="mt-6 font-display text-3xl font-bold leading-tight text-balance sm:text-5xl md:text-6xl">
         We build worlds<br />
         <span class="text-accent">worth getting lost in.</span>
       </h1>
@@ -21,27 +21,27 @@
         StrykaMax is a solo team of designers, coders, and artists making bold,
         handcrafted games with big feelings and bigger pixels.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         <a href="{{ url_for('main.games') }}"
-          class="rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition hover:bg-accent-soft">
+          class="rounded-lg bg-accent px-6 py-3 text-center font-semibold text-ink transition hover:bg-accent-soft">
           Explore our games
         </a>
         <a href="{{ url_for('main.contact') }}"
-          class="rounded-lg border border-line px-6 py-3 font-medium text-cream transition hover:border-accent">
+          class="rounded-lg border border-line px-6 py-3 text-center font-medium text-cream transition hover:border-accent">
           Work with us
         </a>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
       {% for stat in [
       {'n': '4', 'l': 'Games shipped'},
       {'n': '1.2M', 'l': 'Players'},
       {'n': '12', 'l': 'Awards'},
       {'n': '7', 'l': 'Team members'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <p class="font-display text-3xl font-bold text-accent">{{ stat.n }}</p>
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6">
+        <p class="font-display text-2xl font-bold text-accent sm:text-3xl">{{ stat.n }}</p>
         <p class="mt-1 text-sm text-muted">{{ stat.l }}</p>
       </div>
       {% endfor %}
@@ -50,11 +50,11 @@
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-20">
-    <div class="grid gap-10 md:grid-cols-3">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <div class="grid gap-8 sm:gap-10 md:grid-cols-3">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Since 2019</p>
-        <h2 class="mt-2 font-display text-3xl font-bold">About the studio</h2>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">About the studio</h2>
         <p class="mt-4 leading-relaxed text-muted">
           Founded in a cramped apartment in 2019, we've stayed small on purpose —
           close-knit enough that every pixel and note gets the attention it deserves.
@@ -64,12 +64,12 @@
           Read our story →
         </a>
       </div>
-      <div class="md:col-span-2 grid gap-6 sm:grid-cols-2">
+      <div class="grid gap-4 sm:gap-6 sm:grid-cols-2 md:col-span-2">
         {% for item in [
         {'t': 'Handmade craft', 'd': 'Every asset is made in-house, from sprite work to the last synth stab.'},
         {'t': 'Player-first', 'd': 'We prototype fast and playtest often. If it is not fun, it does not ship.'},
         ] %}
-        <div class="rounded-2xl border border-line bg-surface p-6">
+        <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
           <h3 class="font-display text-lg font-semibold text-accent">{{ item.t }}</h3>
           <p class="mt-2 text-sm leading-relaxed text-muted">{{ item.d }}</p>
         </div>
@@ -80,45 +80,50 @@
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-20">
-    <div class="flex items-end justify-between">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <div class="flex items-end justify-between gap-4">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Catalog</p>
-        <h2 class="mt-2 font-display text-3xl font-bold">Our games</h2>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Our games</h2>
       </div>
       <a href="{{ url_for('main.games') }}"
         class="hidden text-sm font-semibold text-accent hover:text-accent-soft sm:block">
         View all games →
       </a>
     </div>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-6 lg:grid-cols-4">
       {% for game in games %}
-      <article class="group flex flex-col rounded-2xl border border-line bg-surface p-6 transition hover:border-accent">
-        <div class="mb-4 flex items-center justify-between">
+      <article
+        class="group flex flex-col rounded-2xl border border-line bg-surface p-4 transition hover:border-accent sm:p-6">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2 sm:mb-4">
           <span class="rounded-md bg-ink px-2 py-1 text-xs font-medium text-muted">{{ game.genre }}</span>
           {% set badge = {'Released': 'text-accent', 'Early Access': 'text-accent', 'Coming Soon': 'text-muted'} %}
           <span class="text-xs font-semibold {{ badge.get(game.status, 'text-muted') }}">{{ game.status }}</span>
         </div>
-        <h3 class="font-display text-xl font-bold text-cream">{{ game.title }}</h3>
+        <h3 class="font-display text-lg font-bold text-cream sm:text-xl">{{ game.title }}</h3>
         <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{{ game.blurb }}</p>
       </article>
       {% endfor %}
     </div>
+    <a href="{{ url_for('main.games') }}"
+      class="mt-6 block text-center text-sm font-semibold text-accent hover:text-accent-soft sm:hidden">
+      View all games →
+    </a>
   </div>
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-20">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
     <p class="text-xs font-semibold uppercase tracking-wider text-accent">Word of mouth</p>
-    <h2 class="mt-2 font-display text-3xl font-bold">What players are saying</h2>
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">What players are saying</h2>
+    <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for t in [
       {'q': 'Neon Drift is the racer I didn\'t know I needed. The soundtrack alone is worth it.', 'a': '— Steam
       review'},
       {'q': 'Hollow Signal genuinely creeped me out. Great atmosphere, tight pacing.', 'a': '— IGN Indie Spotlight'},
       {'q': 'Pocket Cosmos is the coziest thing I\'ve played all year.', 'a': '— itch.io community'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-6">
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
         <p class="text-sm leading-relaxed text-muted">"{{ t.q }}"</p>
         <p class="mt-4 text-xs font-medium text-accent">{{ t.a }}</p>
       </div>
@@ -129,20 +134,20 @@
 
 {% if posts %}
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-20">
-    <div class="flex items-end justify-between">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <div class="flex items-end justify-between gap-4">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Dev diary</p>
-        <h2 class="mt-2 font-display text-3xl font-bold">From the devlog</h2>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">From the devlog</h2>
       </div>
       <a href="{{ url_for('main.devlog') }}"
         class="hidden text-sm font-semibold text-accent hover:text-accent-soft sm:block">
         Read all posts →
       </a>
     </div>
-    <div class="mt-10 grid gap-6 md:grid-cols-3">
+    <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for post in posts %}
-      <article class="rounded-2xl border border-line bg-surface p-6">
+      <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
         <p class="text-xs text-muted">{{ post.created_at.strftime('%b %d, %Y') }}</p>
         <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ post.title }}</h3>
         <p class="mt-2 text-sm leading-relaxed text-muted">
@@ -151,15 +156,19 @@
       </article>
       {% endfor %}
     </div>
+    <a href="{{ url_for('main.devlog') }}"
+      class="mt-6 block text-center text-sm font-semibold text-accent hover:text-accent-soft sm:hidden">
+      Read all posts →
+    </a>
   </div>
 </section>
 {% endif %}
 
 <section>
-  <div class="mx-auto max-w-6xl px-6 py-20 text-center">
+  <div class="mx-auto max-w-6xl px-6 py-12 text-center sm:py-20">
     <p class="text-sm font-medium uppercase tracking-wide text-muted">As featured in</p>
     <div
-      class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-lg font-display font-bold text-muted">
+      class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 font-display text-base font-bold text-muted sm:gap-x-10 sm:text-lg">
       <span>IGN</span>
       <span>PC Gamer</span>
       <span>Rock Paper Shotgun</span>

@@ -63,3 +63,13 @@ if __name__ == "__main__":
 # Type "help" for help.
 
 # postgres=# 
+
+# npx @tailwindcss/cli -i ./src/input.css -o ./static/css/output.css --minify
+
+# git add .
+# git commit -m "update tailwind styles"
+# git push
+
+git add .
+git commit -m "update tailwind styles"
+git push

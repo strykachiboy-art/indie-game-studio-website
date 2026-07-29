@@ -5,7 +5,7 @@
 <p class="text-xs font-semibold uppercase tracking-wider text-accent">Posts</p>
 <h1 class="mt-2 font-display text-2xl font-bold">{{ heading }}</h1>
 
-<form method="POST" class="mt-6 grid gap-4 rounded-2xl border border-line bg-surface p-6">
+<form method="POST" class="mt-6 grid gap-4 rounded-2xl border border-line bg-surface p-4 sm:p-6">
   {{ form.hidden_tag() }}
   <div>
     <label for="title" class="mb-1 block text-sm text-muted">Title</label>
@@ -15,18 +15,19 @@
   </div>
   <div>
     <label for="body" class="mb-1 block text-sm text-muted">Body</label>
-    {{ form.body(id="body", rows="12", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-    placeholder-muted focus:border-accent focus:outline-none", placeholder="Write your post…") }}
+    {{ form.body(id="body", rows="10", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
+    placeholder-muted focus:border-accent focus:outline-none sm:rows-12", placeholder="Write your post…") }}
     {% for e in form.body.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
   </div>
   <label class="flex items-center gap-2 text-sm text-muted">
     {{ form.published(class="h-4 w-4 rounded border-line bg-ink accent-accent") }}
     Published
   </label>
-  <div class="flex gap-3">
-    {{ form.submit(class="rounded-lg bg-accent px-6 py-3 font-semibold text-ink hover:bg-accent-soft cursor-pointer") }}
+  <div class="flex flex-col gap-3 sm:flex-row">
+    {{ form.submit(class="w-full rounded-lg bg-accent px-6 py-3 text-center font-semibold text-ink hover:bg-accent-soft
+    cursor-pointer sm:w-auto") }}
     <a href="{{ url_for('admin.posts') }}"
-      class="rounded-lg border border-line px-6 py-3 font-medium text-cream hover:border-accent">Cancel</a>
+      class="w-full rounded-lg border border-line px-6 py-3 text-center font-medium text-cream hover:border-accent sm:w-auto">Cancel</a>
   </div>
 </form>
 {% endblock %}

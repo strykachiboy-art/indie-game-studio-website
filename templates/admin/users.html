@@ -6,7 +6,45 @@
 <h1 class="mt-2 font-display text-2xl font-bold">Users</h1>
 <p class="mt-1 text-sm text-muted">Manage accounts and admin access.</p>
 
-<div class="mt-6 overflow-x-auto rounded-2xl border border-line bg-surface">
+<!-- Mobile: card list -->
+<div class="mt-6 grid gap-4 sm:hidden">
+  {% for user in users %}
+  <div class="rounded-2xl border border-line bg-surface p-4">
+    <div class="flex items-start justify-between gap-3">
+      <div class="min-w-0">
+        <p class="truncate font-medium text-cream">{{ user.username }}</p>
+        <p class="truncate text-sm text-muted">{{ user.email }}</p>
+      </div>
+      {% if user.is_admin %}
+      <span class="shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">Admin</span>
+      {% else %}
+      <span class="shrink-0 rounded-full bg-ink px-2 py-0.5 text-xs text-muted">Member</span>
+      {% endif %}
+    </div>
+    <p class="mt-2 text-xs text-muted">Joined {{ user.created_at.strftime('%b %d, %Y') }}</p>
+    <div class="mt-4 flex items-center gap-2">
+      <form method="POST" action="{{ url_for('admin.toggle_admin', user_id=user.id) }}" class="flex-1">
+        <button class="w-full rounded-md border border-line px-3 py-1.5 text-xs text-cream hover:border-accent">
+          {{ 'Revoke admin' if user.is_admin else 'Make admin' }}
+        </button>
+      </form>
+      <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}"
+        onsubmit="return confirm('Delete {{ user.username }}?');" class="flex-1">
+        <button class="w-full rounded-md border border-red-500/40 px-3 py-1.5 text-xs text-red-300 hover:bg-red-500/10">
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <div class="rounded-2xl border border-line bg-surface p-8 text-center text-muted">
+    No users found.
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Desktop/tablet: table -->
+<div class="mt-6 hidden overflow-x-auto rounded-2xl border border-line bg-surface sm:block">
   <table class="w-full min-w-[640px] text-left text-sm">
     <thead class="border-b border-line text-xs uppercase tracking-wider text-muted">
       <tr>
