@@ -70,6 +70,3 @@ if __name__ == "__main__":
 # git commit -m "update tailwind styles"
 # git push
 
-git add .
-git commit -m "update tailwind styles"
-git push
