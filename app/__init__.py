@@ -2,7 +2,7 @@ import os
 
 import click
 from flask import Flask, render_template
-
+from datetime import datetime
 from config import Config
 from .extensions import db, login_manager, migrate
 
@@ -39,6 +39,11 @@ def create_app(config_class=Config):
         return render_template("errors/404.html"), 404
 
     register_cli(app)
+
+    @app.context_processor
+    def inject_current_year():
+        return {'current_year': datetime.now().year}
+
     return app
 
 
@@ -69,3 +74,6 @@ def register_cli(app):
         db.session.add(admin)
         db.session.commit()
         click.echo(f"Created admin user: {email} / {password}")
+        
+        
+        

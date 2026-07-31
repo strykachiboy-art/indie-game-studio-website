@@ -2,7 +2,15 @@
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
     <a href="{{ url_for('main.index') }}"
       class="inline-flex items-center gap-3 font-display text-xl font-bold tracking-tight text-cream">
-      <img src="{{ url_for('static', filename='images/stryka_logo.svg') }}" alt="StrykaMax" class="h-8" />
+      <svg viewBox="0 0 194 32" fill="none" role="img" aria-label="StrykaMax" class="h-8 w-auto">
+        <g>
+          <polygon points="2,30 9,30 15,2 8,2" fill="#A3E635" />
+          <polygon points="16,30 23,30 27,11 20,11" fill="#A3E635" fill-opacity="0.72" />
+          <polygon points="30,30 37,30 39,20 32,20" fill="#A3E635" fill-opacity="0.42" />
+        </g>
+        <text x="52" y="23" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="19"
+          letter-spacing="0.5" fill="#F4F1EA">STRYKA<tspan fill="#A3E635">MAX</tspan></text>
+      </svg>
     </a>
 
     {% set links = [

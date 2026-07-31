@@ -18,17 +18,36 @@
         <span class="text-accent">worth getting lost in.</span>
       </h1>
       <p class="mt-6 max-w-md text-pretty leading-relaxed text-muted">
-        One person, every discipline. StrykaMax designs, builds, and ships original games with the same care a larger
-        studio brings to a AAA release — just smaller, sharper,
-        and entirely handmade.
+        StrykaMax Studio is my solo indie game development journey.
+        Every game is designed, programmed, and polished by one developer
+        passionate about creating memorable worlds and meaningful gameplay.
+        No committees, no focus groups — just one person chasing ideas
+        from a blank file to something you can actually play, and
+        writing down everything learned along the way.
       </p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+          🎮 Solo Developer
+        </span>
+        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+          🐍 Python
+        </span>
+        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+          🚀 Flask
+        </span>
+        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+          🎨 Tailwind CSS
+        </span>
+      </div>
       <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <a href="{{ url_for('main.games') }}"
-          class="rounded-lg bg-accent px-6 py-3 text-center font-semibold text-ink transition hover:bg-accent-soft">
+        <a href="{{ url_for('main.games') }}" class="rounded-xl bg-accent px-6 py-3 text-center font-semibold text-ink
+          transition-all duration-300 hover:scale-[1.02]
+          hover:bg-accent-soft active:scale-95">
           Explore our games
         </a>
-        <a href="{{ url_for('main.contact') }}"
-          class="rounded-lg border border-line px-6 py-3 text-center font-medium text-cream transition hover:border-accent">
+        <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-6 py-3 text-center
+          font-medium text-cream transition-all duration-300
+          hover:border-accent hover:-translate-y-0.5">
           Work with us
         </a>
       </div>
@@ -36,12 +55,16 @@
 
     <div class="grid grid-cols-2 gap-3 sm:gap-4">
       {% for stat in [
-      {'n': '4', 'l': 'Games shipped'},
-      {'n': '1.2M', 'l': 'Players'},
-      {'n': '12', 'l': 'Awards'},
-      {'n': '7', 'l': 'Team members'}
+      {'n': '1', 'l': 'Solo Developer'},
+      {'n': '3+', 'l': 'Projects Built'},
+      {'n': '24/7', 'l': 'Learning'},
+      {'n': '∞', 'l': 'Ideas'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6">
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
         <p class="font-display text-2xl font-bold text-accent sm:text-3xl">{{ stat.n }}</p>
         <p class="mt-1 text-sm text-muted">{{ stat.l }}</p>
       </div>
@@ -54,11 +77,21 @@
   <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
     <div class="grid gap-8 sm:gap-10 md:grid-cols-3">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Since 2019</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Since 2026</p>
         <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">About the studio</h2>
         <p class="mt-4 leading-relaxed text-muted">
-          Founded in a cramped apartment in 2019, we've stayed small on purpose —
-          close-knit enough that every pixel and note gets the attention it deserves.
+          StrykaMax Studio is a solo game development studio where every
+          system, artwork, mechanic, and line of code is created by one
+          developer with a passion for immersive experiences. It started
+          as a way to learn by shipping — small prototypes, weekend
+          experiments, and unfinished ideas that slowly turned into
+          finished games.
+        </p>
+        <p class="mt-4 leading-relaxed text-muted">
+          There's no studio behind the name yet, just a developer who
+          treats every bug fixed and every mechanic tuned as progress
+          worth sharing. The goal isn't to look big — it's to build
+          things that are honest, playable, and genuinely fun.
         </p>
         <a href="{{ url_for('main.about') }}"
           class="mt-4 inline-block text-sm font-semibold text-accent hover:text-accent-soft">
@@ -67,10 +100,31 @@
       </div>
       <div class="grid gap-4 sm:gap-6 sm:grid-cols-2 md:col-span-2">
         {% for item in [
-        {'t': 'Handmade craft', 'd': 'Every asset is made in-house, from sprite work to the last synth stab.'},
-        {'t': 'Player-first', 'd': 'We prototype fast and playtest often. If it is not fun, it does not ship.'},
+        {
+        't': 'Built from Scratch',
+        'd': 'Every project is handcrafted with clean code, thoughtful design, and a commitment to constant
+        improvement.'
+        },
+        {
+        't': 'Player First',
+        'd': 'Every mechanic starts with one question: would I genuinely enjoy playing this myself?'
+        },
+        {
+        't': 'Learning in Public',
+        'd': 'Devlogs, prototypes, and dead ends are shared openly — the process is as much a part of the project as the
+        game itself.'
+        },
+        {
+        't': 'Small Scope, Real Polish',
+        'd': 'Projects are kept small on purpose, so every one that ships gets the attention a bigger, rushed game never
+        would.'
+        }
         ] %}
-        <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+        <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+          transition-all duration-300
+          hover:-translate-y-1
+          hover:border-accent
+          hover:shadow-xl">
           <h3 class="font-display text-lg font-semibold text-accent">{{ item.t }}</h3>
           <p class="mt-2 text-sm leading-relaxed text-muted">{{ item.d }}</p>
         </div>
@@ -94,8 +148,11 @@
     </div>
     <div class="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-6 lg:grid-cols-4">
       {% for game in games %}
-      <article
-        class="group flex flex-col rounded-2xl border border-line bg-surface p-4 transition hover:border-accent sm:p-6">
+      <article class="group flex flex-col rounded-2xl border border-line bg-surface p-4 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
         <div class="mb-3 flex flex-wrap items-center justify-between gap-2 sm:mb-4">
           <span class="rounded-md bg-ink px-2 py-1 text-xs font-medium text-muted">{{ game.genre }}</span>
           {% set badge = {'Released': 'text-accent', 'Early Access': 'text-accent', 'Coming Soon': 'text-muted'} %}
@@ -115,18 +172,55 @@
 
 <section class="border-b border-line">
   <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
-    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Word of mouth</p>
-    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">What players are saying</h2>
-    <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
-      {% for t in [
-      {'q': 'Neon Drift is the racer I didn\'t know I needed. The soundtrack alone is worth it.', 'a': '— Steam
-      review'},
-      {'q': 'Hollow Signal genuinely creeped me out. Great atmosphere, tight pacing.', 'a': '— IGN Indie Spotlight'},
-      {'q': 'Pocket Cosmos is the coziest thing I\'ve played all year.', 'a': '— itch.io community'}
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">The road so far</p>
+    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Journey &amp; Roadmap</h2>
+    <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+      StrykaMax Studio didn't start with a business plan — it started with
+      curiosity about how games are actually made. Here's roughly how the
+      journey has gone, and where it's headed next.
+    </p>
+    <div class="mt-10 grid gap-4 sm:gap-6 md:grid-cols-4">
+      {% for milestone in [
+      {'p': '2026', 't': 'First Prototype', 'd': 'Started learning Flask and Python by building small game-adjacent web
+      tools instead of full games.'},
+      {'p': 'Early', 't': 'Finding the Craft', 'd': 'Shipped the first few playable prototypes, most of them small,
+      rough, and never released publicly.'},
+      {'p': 'Now', 't': 'Building in Public', 'd': 'Sharing devlogs, iterating on real projects, and treating every
+      release as a lesson rather than a launch.'},
+      {'p': 'Next', 't': 'Bigger Systems', 'd': 'Exploring Rust for performance-heavy game systems while keeping the web
+      side running on Python and Flask.'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
-        <p class="text-sm leading-relaxed text-muted">"{{ t.q }}"</p>
-        <p class="mt-4 text-xs font-medium text-accent">{{ t.a }}</p>
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">{{ milestone.p }}</p>
+        <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ milestone.t }}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{{ milestone.d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="border-b border-line">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">How I work</p>
+    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Development Philosophy</h2>
+    <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
+      {% for card in [
+      {'t': 'Learn', 'd': 'Every project teaches me something new.'},
+      {'t': 'Build', 'd': 'Ideas become playable experiences through code and creativity.'},
+      {'t': 'Improve', 'd': 'Every release is another step toward becoming a better developer.'}
+      ] %}
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
+        <h3 class="font-display text-lg font-semibold text-accent">{{ card.t }}</h3>
+        <p class="mt-3 text-sm leading-relaxed text-muted">{{ card.d }}</p>
       </div>
       {% endfor %}
     </div>
@@ -148,7 +242,11 @@
     </div>
     <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for post in posts %}
-      <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+      <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
         <p class="text-xs text-muted">{{ post.created_at.strftime('%b %d, %Y') }}</p>
         <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ post.title }}</h3>
         <p class="mt-2 text-sm leading-relaxed text-muted">
@@ -165,15 +263,44 @@
 </section>
 {% endif %}
 
+<section class="border-b border-line">
+  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Curious?</p>
+    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">A few questions people ask</h2>
+    <div class="mt-8 grid gap-4 sm:gap-6 md:grid-cols-2">
+      {% for faq in [
+      {'q': 'Is StrykaMax Studio a full team?', 'a': 'No — it\'s one developer handling design, code, and everything in
+      between. The "we" language is being replaced with an honest, solo voice.'},
+      {'q': 'What tech is it built with?', 'a': 'The website runs on Python and Flask with Tailwind CSS for styling,
+      backed by a database for games and devlog posts.'},
+      {'q': 'Are the games finished or still in progress?', 'a': 'A mix of both — some are early prototypes, others are
+      further along. Status badges on each game card show where things stand.'},
+      {'q': 'Can I follow along with development?', 'a': 'Yes — the devlog is where progress, setbacks, and lessons get
+      posted as they happen, not after the fact.'}
+      ] %}
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:border-accent
+        hover:shadow-xl">
+        <h3 class="font-display text-base font-semibold text-cream">{{ faq.q }}</h3>
+        <p class="mt-2 text-sm leading-relaxed text-muted">{{ faq.a }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="mx-auto max-w-6xl px-6 py-12 text-center sm:py-20">
-    <p class="text-sm font-medium uppercase tracking-wide text-muted">As featured in</p>
+    <p class="text-sm font-medium uppercase tracking-wide text-muted">Built With</p>
     <div
       class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 font-display text-base font-bold text-muted sm:gap-x-10 sm:text-lg">
-      <span>IGN</span>
-      <span>PC Gamer</span>
-      <span>Rock Paper Shotgun</span>
-      <span>itch.io</span>
+      <span>Python</span>
+      <span>Flask</span>
+      <span>Tailwind CSS</span>
+      <span>PostgreSQL</span>
+      <span>Git</span>
     </div>
   </div>
 </section>

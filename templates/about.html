@@ -4,26 +4,80 @@
 {% block content %}
 <section class="border-b border-line">
     <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Our story</p>
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">My story</p>
         <h1 class="mt-2 font-display text-3xl font-bold sm:text-5xl">About the studio</h1>
         <p class="mt-6 max-w-2xl leading-relaxed text-muted">
-            Founded in a cramped apartment in 2019, we've stayed small on purpose —
-            close-knit enough that every pixel and note gets the attention it deserves.
+            StrykaMax Studio started in 2026 as a solo project — no team,
+            no office, just one developer learning Python and Flask by
+            building things instead of just reading about them. It's
+            small on purpose, because small is what lets every part of
+            it get real attention.
+        </p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+            This isn't a company with a history to sell. It's a
+            developer figuring things out in public — freelancing to pay
+            the bills, and building this studio on the side as a place
+            to learn, ship, and eventually turn into something bigger.
+        </p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+            The name is a placeholder for where this is headed, not a
+            claim about where it is now. Every page on this site gets
+            updated as the skills, the projects, and the ambition grow —
+            so what you're reading today is a snapshot, not a finished
+            pitch.
         </p>
     </div>
 </section>
 
 <section class="border-b border-line">
     <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
-        <h2 class="font-display text-2xl font-bold sm:text-3xl">What we believe</h2>
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Why solo</p>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Why build this alone</h2>
+        <div class="mt-6 grid gap-8 sm:mt-10 md:grid-cols-2">
+            <p class="leading-relaxed text-muted">
+                Going solo wasn't the plan from day one — it's just where
+                things naturally landed. Freelancing already meant
+                working alone on client projects, so building a personal
+                studio the same way felt like the honest extension of
+                that. No co-founder to split decisions with, no
+                investor to please — just direct control over what gets
+                built and how.
+            </p>
+            <p class="leading-relaxed text-muted">
+                The tradeoff is obvious: progress is slower than a full
+                team, and some skills — art, sound, marketing — are
+                still being picked up rather than outsourced. But
+                everything that ships is fully understood end to end,
+                and every mistake made along the way becomes a lesson
+                that sticks instead of someone else's problem to fix.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+        <h2 class="font-display text-2xl font-bold sm:text-3xl">What I believe</h2>
         <div class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6">
             {% for item in [
-            {'t': 'Handmade craft', 'd': 'Every asset is made in-house, from sprite work to the last synth stab.'},
-            {'t': 'Player-first', 'd': 'We prototype fast and playtest often. If it is not fun, it does not ship.'},
-            {'t': 'Bold worlds', 'd': 'Strange settings, strong art direction, and stories that stick.'},
-            {'t': 'Built to last', 'd': 'We support our games long after launch with updates and community events.'}
+            {'t': 'Built from scratch', 'd': 'Every line of code, every system, every piece of copy on this site is
+            handmade — nothing templated in from a bigger studio\'s playbook.'},
+            {'t': 'Player-first', 'd': 'Every mechanic starts with one question: would I genuinely enjoy playing this
+            myself?'},
+            {'t': 'Learning in public', 'd': 'Mistakes, dead ends, and slow progress get shared too — not just the
+            polished wins.'},
+            {'t': 'Small scope, real polish', 'd': 'Projects stay small on purpose, so the ones that ship get finished
+            properly instead of rushed out half-done.'},
+            {'t': 'Consistency over hype', 'd': 'Showing up and building, week after week, matters more than one big
+            flashy announcement.'},
+            {'t': 'Honesty in the pitch', 'd': 'No inflated numbers, no fake press quotes — just what\'s actually been
+            built, described plainly.'}
             ] %}
-            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-accent
+                hover:shadow-xl">
                 <h3 class="font-display text-lg font-semibold text-accent">{{ item.t }}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-muted">{{ item.d }}</p>
             </div>
@@ -35,15 +89,23 @@
 <section class="border-b border-line">
     <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Milestones</p>
-        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Our journey</h2>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">The journey so far</h2>
         <div class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-4">
             {% for step in [
-            {'y': '2019', 't': 'Studio founded', 'd': 'Two people, one laptop, zero budget.'},
-            {'y': '2021', 't': 'First release', 'd': 'Neon Drift launches to a small but loud community.'},
-            {'y': '2023', 't': 'Team grows', 'd': 'We bring on artists and sound design help.'},
-            {'y': '2026', 't': 'Four games strong', 'd': 'Still small, still handmade, still obsessed.'}
+            {'y': '2026', 't': 'Getting started', 'd': 'Began learning Python and Flask, building small web tools before
+            attempting a full game.'},
+            {'y': 'Early on', 't': 'First prototypes', 'd': 'Rough, unreleased experiments — mostly for learning how
+            systems fit together.'},
+            {'y': 'Now', 't': 'Building in public', 'd': 'Sharing devlogs and shipping small, honest projects instead of
+            waiting for something perfect.'},
+            {'y': 'Next', 't': 'Learning Rust', 'd': 'Exploring Rust for game systems, while the web and business side
+            stays on Python and Flask.'}
             ] %}
-            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-accent
+                hover:shadow-xl">
                 <p class="font-display text-2xl font-bold text-accent">{{ step.y }}</p>
                 <h3 class="mt-2 text-sm font-semibold text-cream">{{ step.t }}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-muted">{{ step.d }}</p>
@@ -55,18 +117,53 @@
 
 <section class="border-b border-line">
     <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
-        <h2 class="font-display text-2xl font-bold sm:text-3xl">The people behind it</h2>
-        <div class="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-6 lg:grid-cols-4">
-            {% for member in [
-            {'n': 'Founder & Lead Dev', 'r': 'Code, systems, and way too much coffee.'},
-            {'n': 'Art Director', 'r': 'Sprites, palettes, and the studio\'s visual voice.'},
-            {'n': 'Sound Designer', 'r': 'Every synth stab and footstep you hear.'},
-            {'n': 'Community Lead', 'r': 'Keeps players in the loop and devs sane.'}
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Who's behind it</p>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">One developer, every role</h2>
+        <div class="mt-8 grid gap-6 sm:mt-10 md:grid-cols-[auto,1fr] md:items-center">
+            <div class="mx-auto h-20 w-20 rounded-full bg-ink sm:h-24 sm:w-24"></div>
+            <div>
+                <h3 class="font-display text-lg font-semibold text-cream">Solo Developer</h3>
+                <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                    Design, code, art direction, and every bug fix run
+                    through one person. There's no art team or sound
+                    designer yet — everything here is built and learned
+                    from the ground up, with Python and Flask as the
+                    daily tools and Rust as the next skill being added
+                    to the belt.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Under the hood</p>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Tools of the trade</h2>
+        <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+            The stack is kept deliberately simple — tools that are
+            actually understood beat trendy ones that aren't. It grows
+            slowly, and only when a real project needs it to.
+        </p>
+        <div class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
+            {% for tool in [
+            {'t': 'Python', 'd': 'The core language behind every backend, script, and tool built so far.'},
+            {'t': 'Flask', 'd': 'Powers this site and most freelance web projects — lightweight and easy to reason
+            about.'},
+            {'t': 'Tailwind CSS', 'd': 'Used for fast, consistent styling without fighting a heavy design system.'},
+            {'t': 'SQLite / PostgreSQL', 'd': 'SQLite for quick prototypes, PostgreSQL as projects grow into something
+            more serious.'},
+            {'t': 'Git', 'd': 'Every project, however small, gets version-controlled from the first commit.'},
+            {'t': 'Rust (learning)', 'd': 'The next skill in progress, aimed at performance-heavy game systems down the
+            line.'}
             ] %}
-            <div class="rounded-2xl border border-line bg-surface p-4 text-center sm:p-6">
-                <div class="mx-auto h-14 w-14 rounded-full bg-ink sm:h-16 sm:w-16"></div>
-                <h3 class="mt-4 font-display text-sm font-semibold text-cream">{{ member.n }}</h3>
-                <p class="mt-1 text-xs leading-relaxed text-muted">{{ member.r }}</p>
+            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-accent
+                hover:shadow-xl">
+                <h3 class="font-display text-base font-semibold text-accent">{{ tool.t }}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{{ tool.d }}</p>
             </div>
             {% endfor %}
         </div>
@@ -79,12 +176,18 @@
         <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Frequently asked</h2>
         <div class="mt-8 divide-y divide-line rounded-2xl border border-line bg-surface sm:mt-10">
             {% for faq in [
-            {'q': 'Are you hiring?', 'a': 'Not actively, but we always want to hear from talented folks — reach out via
-            the contact page.'},
-            {'q': 'Do you take publishing deals?', 'a': 'We evaluate case by case. Tell us about your game on the
-            contact page.'},
-            {'q': 'What engines do you use?', 'a': 'A mix, depending on the project — we pick what suits the game, not
-            the trend.'}
+            {'q': 'Is this a full studio or just you?', 'a': 'Just one developer for now. The name says "studio" as a
+            goal to grow into, not a claim about the team behind it today.'},
+            {'q': 'What do you build with?', 'a': 'The site and any web tools run on Python, Flask, and Tailwind CSS.
+            Game systems are the next area being explored with Rust.'},
+            {'q': 'Are you available for freelance work?', 'a': 'Yes — freelance web development, mostly Flask-based
+            sites with an e-commerce focus, funds this studio on the side.'},
+            {'q': 'Can I follow the progress?', 'a': 'Yes — the devlog is where real progress, setbacks, and lessons get
+            posted as they happen.'},
+            {'q': 'Why call it a "studio" if it\'s one person?', 'a': 'It\'s the name for where this is headed, used
+            honestly along the way — the about page exists so nobody has to guess.'},
+            {'q': 'Do you use a game engine?', 'a': 'Not yet in a fixed way — most work so far has been web-based tools
+            and prototypes, with game systems in Rust being the next step.'}
             ] %}
             <details class="group p-4 sm:p-6">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4">

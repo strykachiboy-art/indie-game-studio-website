@@ -3,15 +3,37 @@
 
 {% block content %}
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+    <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-20">
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Dev diary</p>
-        <h1 class="mt-2 font-display text-3xl font-bold sm:text-5xl">From the devlog</h1>
-        <p class="mt-3 text-muted">Notes from the trenches — builds, bugs, and behind-the-scenes.</p>
+        <h1 class="mt-2 font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">From the devlog</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+            Notes from the trenches — what's being built, what broke,
+            and what got learned along the way. Posted as it happens,
+            not cleaned up after the fact.
+        </p>
+
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:max-w-xl sm:grid-cols-4 sm:gap-4">
+            {% for stat in [
+            {'n': posts|length if posts else '0', 'l': 'Posts so far'},
+            {'n': '1', 'l': 'Solo writer'},
+            {'n': '2026', 'l': 'Started'},
+            {'n': '0', 'l': 'Filler posts'}
+            ] %}
+            <div class="rounded-2xl border border-line bg-surface p-3 text-center sm:p-4">
+                <p class="font-display text-xl font-bold text-accent sm:text-2xl">{{ stat.n }}</p>
+                <p class="mt-1 text-xs text-muted">{{ stat.l }}</p>
+            </div>
+            {% endfor %}
+        </div>
 
         {% if posts %}
-        <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
+        <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
             {% for post in posts %}
-            <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-accent
+                hover:shadow-xl">
                 <p class="text-xs text-muted">{{ post.created_at.strftime('%b %d, %Y') }}</p>
                 <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ post.title }}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-muted">
@@ -21,22 +43,61 @@
             {% endfor %}
         </div>
         {% else %}
-        <p class="mt-10 text-muted">No posts yet — check back soon.</p>
+        <div class="mt-10 rounded-2xl border border-dashed border-line bg-surface p-6 text-center sm:p-12">
+            <p class="font-display text-lg font-semibold text-cream">Nothing posted yet</p>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
+                The first devlog entry hasn't gone up yet — this space
+                will start filling in once real progress is worth
+                writing about. Check back soon.
+            </p>
+        </div>
         {% endif %}
     </div>
 </section>
 
+<!-- Why keep a devlog -->
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
-        <h2 class="font-display text-2xl font-bold sm:text-3xl">Browse by topic</h2>
-        <div class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+    <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Why bother</p>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Why write a devlog at all</h2>
+        <div class="mt-6 grid gap-6 sm:mt-8 sm:gap-8 md:grid-cols-2">
+            <p class="text-sm leading-relaxed text-muted sm:text-base">
+                It's easy to only show the finished, polished stuff. A
+                devlog forces the opposite — writing down what's
+                actually happening while it's happening, including the
+                parts that don't work yet.
+            </p>
+            <p class="text-sm leading-relaxed text-muted sm:text-base">
+                It's also a record for future reference: a way to look
+                back later and see how a specific bug got fixed, why a
+                decision was made, or how far things have actually come
+                since the first messy prototype.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Browse by topic -->
+<section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-20">
+        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Categories</p>
+        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Browse by topic</h2>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+            These are the kinds of posts that will show up here as they
+            get written — not a promise every category is already full.
+        </p>
+        <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {% for cat in [
-            {'t': 'Dev diaries', 'd': 'Design decisions and the reasoning behind them.'},
-            {'t': 'Art & sound', 'd': 'Process breakdowns from our art and audio work.'},
-            {'t': 'Patch notes', 'd': 'What changed, what broke, what got fixed.'},
-            {'t': 'Community', 'd': 'Fan art, events, and shoutouts from players.'}
+            {'t': 'Dev diaries', 'd': 'Design decisions, what changed, and the reasoning behind them.'},
+            {'t': 'Learning notes', 'd': 'What\'s being picked up along the way — Python, Flask, and eventually Rust.'},
+            {'t': 'Bugs & fixes', 'd': 'Real problems that came up, and how they actually got solved.'},
+            {'t': 'Behind the scenes', 'd': 'The messier side of building solo — dead ends, restarts, and rethinks.'}
             ] %}
-            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+                transition-all duration-300
+                hover:-translate-y-1
+                hover:border-accent
+                hover:shadow-xl">
                 <h3 class="font-display text-lg font-semibold text-accent">{{ cat.t }}</h3>
                 <p class="mt-2 text-sm leading-relaxed text-muted">{{ cat.d }}</p>
             </div>
@@ -45,39 +106,29 @@
     </div>
 </section>
 
+<!-- Follow along -->
 <section>
-    <div class="mx-auto max-w-3xl px-6 py-12 sm:py-20">
+    <div class="mx-auto max-w-3xl px-5 py-12 sm:px-6 sm:py-20">
         <div class="rounded-2xl border border-line bg-surface p-6 text-center sm:p-10">
-            <div class="mx-auto flex -space-x-3">
-                {% for i in range(5) %}
-                <span class="h-10 w-10 rounded-full border-2 border-surface bg-ink"></span>
-                {% endfor %}
-                <span
-                    class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-surface bg-accent text-xs font-bold text-ink">
-                    +2k
-                </span>
-            </div>
-
-            <p class="mt-6 text-xs font-semibold uppercase tracking-wider text-accent">Join the community</p>
+            <p class="text-xs font-semibold uppercase tracking-wider text-accent">Follow along</p>
             <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">
-                2,000+ players are already in the loop
+                Be here from the start
             </h2>
-            <p class="mx-auto mt-3 max-w-md text-muted">
-                Beta invites, patch notes, and behind-the-scenes drops — before anyone else sees them.
-                No spam, just the good stuff.
+            <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                There's no community yet — no Discord full of players,
+                no newsletter list to brag about. Just a devlog that
+                gets updated honestly, and an open invitation to check
+                back and watch it grow from zero.
             </p>
 
             <div class="mt-8 flex flex-col items-center gap-3">
-                <a href="#"
-                    class="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition hover:bg-accent-soft sm:w-auto sm:px-8">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.073.073 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.031z" />
-                    </svg>
-                    Join our Discord
+                <a href="{{ url_for('main.contact') }}" class="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 font-semibold text-ink
+                    transition-all duration-300 hover:scale-[1.02]
+                    hover:bg-accent-soft active:scale-95 sm:w-auto sm:px-8">
+                    Say hello
                 </a>
-                <a href="{{ url_for('main.devlog') }}" class="text-sm font-medium text-accent hover:underline">
-                    Or just read the devlog →
+                <a href="{{ url_for('main.games') }}" class="text-sm font-medium text-accent hover:underline">
+                    Or see what's being built →
                 </a>
             </div>
         </div>
