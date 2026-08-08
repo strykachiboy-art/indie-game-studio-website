@@ -6,46 +6,46 @@
   <div class="pointer-events-none absolute inset-0 opacity-30"
     style="background-image: radial-gradient(circle at 20% 20%, #a3e63533, transparent 40%), radial-gradient(circle at 80% 0%, #ff8a5c22, transparent 35%);">
   </div>
-  <div class="mx-auto grid max-w-6xl items-center gap-8 px-6 py-14 sm:py-20 md:grid-cols-2 md:gap-10 md:py-28">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-20 md:grid-cols-2 md:gap-10 md:py-28">
     <div>
       <span
         class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-accent">
         <span class="h-2 w-2 rounded-full bg-accent"></span>
         Solo indie devlog
       </span>
-      <h1 class="mt-6 font-display text-3xl font-bold leading-tight text-balance sm:text-5xl md:text-6xl">
+      <h1 class="mt-4 font-display text-2xl font-bold leading-tight text-balance sm:mt-6 sm:text-5xl md:text-6xl">
         Building games<br />
         <span class="text-accent">from scratch.</span>
       </h1>
-      <p class="mt-6 max-w-md text-pretty leading-relaxed text-muted">
+      <p class="mt-4 max-w-md text-pretty text-xs leading-relaxed text-muted sm:mt-6 sm:text-base">
         StrykaMax Studio is my personal game development journal and lab.
         Every system, script, and idea is built by one developer learning the ropes
         line by line. No launched commercial titles yet — just active prototypes,
         experiments, and writing down everything learned along the way.
       </p>
-      <div class="mt-6 flex flex-wrap gap-2">
-        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+      <div class="mt-4 flex flex-wrap gap-2 sm:mt-6">
+        <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
           🎮 Solo Developer
         </span>
-        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+        <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
           🐍 Python
         </span>
-        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+        <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
           🚀 Flask
         </span>
-        <span class="rounded-full border border-line px-3 py-1 text-xs text-muted">
+        <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
           🎨 Tailwind CSS
         </span>
       </div>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <a href="{{ url_for('main.devlog') }}" class="rounded-xl bg-accent px-6 py-3 text-center font-semibold text-ink
+      <div class="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+        <a href="{{ url_for('main.devlog') }}" class="rounded-xl bg-accent px-5 py-2.5 text-center text-xs font-semibold text-ink
           transition-all duration-300 hover:scale-[1.02]
-          hover:bg-accent-soft active:scale-95">
+          hover:bg-accent-soft active:scale-95 sm:px-6 sm:py-3 sm:text-sm">
           Read the devlog
         </a>
-        <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-6 py-3 text-center
+        <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-5 py-2.5 text-center text-xs
           font-medium text-cream transition-all duration-300
-          hover:border-accent hover:-translate-y-0.5">
+          hover:border-accent hover:-translate-y-0.5 sm:px-6 sm:py-3 sm:text-sm">
           Get in touch
         </a>
       </div>
@@ -63,8 +63,8 @@
         hover:-translate-y-1
         hover:border-accent
         hover:shadow-xl">
-        <p class="font-display text-2xl font-bold text-accent sm:text-3xl">{{ stat.n }}</p>
-        <p class="mt-1 text-sm text-muted">{{ stat.l }}</p>
+        <p class="font-display text-xl font-bold text-accent sm:text-3xl">{{ stat.n }}</p>
+        <p class="mt-1 text-xs text-muted sm:text-sm">{{ stat.l }}</p>
       </div>
       {% endfor %}
     </div>
@@ -72,22 +72,22 @@
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <div class="grid gap-8 sm:gap-10 md:grid-cols-3">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Since 2026</p>
-        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">About the project</h2>
-        <p class="mt-4 leading-relaxed text-muted">
+        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">About the project</h2>
+        <p class="mt-3 text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
           StrykaMax Studio isn't a commercial company — it's a transparent portfolio
           and devlog tracking my journey into game development. Every mechanic and line of code
           is written by me as I figure out how game loops, graphics rendering, and logic work.
         </p>
-        <p class="mt-4 leading-relaxed text-muted">
+        <p class="mt-3 text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
           Instead of hiding behind a fake corporate "we", this site embraces the solo reality:
           celebrating small milestones, posting messy prototypes, and sharing real progress.
         </p>
         <a href="{{ url_for('main.about') }}"
-          class="mt-4 inline-block text-sm font-semibold text-accent hover:text-accent-soft">
+          class="mt-3 inline-block text-xs font-semibold text-accent hover:text-accent-soft sm:mt-4 sm:text-sm">
           Read my story →
         </a>
       </div>
@@ -110,13 +110,13 @@
         'd': 'Focusing on small tools and mechanics first, laying the groundwork before attempting massive scopes.'
         }
         ] %}
-        <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+        <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
           transition-all duration-300
           hover:-translate-y-1
           hover:border-accent
           hover:shadow-xl">
-          <h3 class="font-display text-lg font-semibold text-accent">{{ item.t }}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-muted">{{ item.d }}</p>
+          <h3 class="font-display text-base font-semibold text-accent sm:text-lg">{{ item.t }}</h3>
+          <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ item.d }}</p>
         </div>
         {% endfor %}
       </div>
@@ -125,36 +125,40 @@
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <div>
       <p class="text-xs font-semibold uppercase tracking-wider text-accent">Current Status</p>
-      <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">What's on the workbench</h2>
-      <p class="mt-2 text-sm text-muted">No public game releases yet, but here is what is currently being researched and
+      <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">What's on the workbench</h2>
+      <p class="mt-2 text-xs text-muted sm:text-sm">No public game releases yet, but here is what is currently being
+        researched and
         built.</p>
     </div>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-6">
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <span class="rounded-md bg-ink px-2 py-1 text-xs font-medium text-accent">Prototype Phase</span>
-        <h3 class="mt-4 font-display text-lg font-bold text-cream">Core Game Loop Experiments</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">
+    <div class="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-6">
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+        <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Prototype
+          Phase</span>
+        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Core Game Loop Experiments</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Testing simple mechanics, player input handling, and state management in code environments before committing
           to a full game genre.
         </p>
       </div>
 
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <span class="rounded-md bg-ink px-2 py-1 text-xs font-medium text-muted">Infrastructure</span>
-        <h3 class="mt-4 font-display text-lg font-bold text-cream">Flask Web Dashboard & Devlog</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+        <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Infrastructure</span>
+        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Flask Web Dashboard & Devlog
+        </h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Building and polishing this exact website to track progress, write markdown logs, and manage updates cleanly.
         </p>
       </div>
 
-      <div class="rounded-2xl border border-line bg-surface p-6">
-        <span class="rounded-md bg-ink px-2 py-1 text-xs font-medium text-muted">Research</span>
-        <h3 class="mt-4 font-display text-lg font-bold text-cream">Engine & Tooling Exploration</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">
+      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+        <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Research</span>
+        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Engine & Tooling Exploration
+        </h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Evaluating lightweight tools, graphic libraries, and performance frameworks for future game concepts.
         </p>
       </div>
@@ -163,14 +167,14 @@
 </section>
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <p class="text-xs font-semibold uppercase tracking-wider text-accent">The road so far</p>
-    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Journey &amp; Roadmap</h2>
-    <p class="mt-4 max-w-2xl leading-relaxed text-muted">
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Journey &amp; Roadmap</h2>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
       StrykaMax Studio started with a simple goal: figure out how websites, databases,
       and software engines fit together. Here is how the path looks right now.
     </p>
-    <div class="mt-10 grid gap-4 sm:gap-6 md:grid-cols-4">
+    <div class="mt-6 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-4">
       {% for milestone in [
       {'p': '2026', 't': 'Website Launch', 'd': 'Built and deployed this Flask dashboard to document the learning
       process from day one.'},
@@ -181,14 +185,14 @@
       {'p': 'Future', 't': 'Public Release', 'd': 'Eventually shipping a small, finished indie title built completely
       from scratch.'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
         hover:-translate-y-1
         hover:border-accent
         hover:shadow-xl">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">{{ milestone.p }}</p>
-        <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ milestone.t }}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{{ milestone.d }}</p>
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-accent sm:text-xs">{{ milestone.p }}</p>
+        <h3 class="mt-2 font-display text-base font-semibold text-cream sm:text-lg">{{ milestone.t }}</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ milestone.d }}</p>
       </div>
       {% endfor %}
     </div>
@@ -197,34 +201,34 @@
 
 {% if posts %}
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <div class="flex items-end justify-between gap-4">
       <div>
         <p class="text-xs font-semibold uppercase tracking-wider text-accent">Dev diary</p>
-        <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">From the devlog</h2>
+        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">From the devlog</h2>
       </div>
       <a href="{{ url_for('main.devlog') }}"
         class="hidden text-sm font-semibold text-accent hover:text-accent-soft sm:block">
         Read all posts →
       </a>
     </div>
-    <div class="mt-8 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
+    <div class="mt-6 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for post in posts %}
-      <article class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+      <article class="rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
         hover:-translate-y-1
         hover:border-accent
         hover:shadow-xl">
-        <p class="text-xs text-muted">{{ post.created_at.strftime('%b %d, %Y') }}</p>
-        <h3 class="mt-2 font-display text-lg font-semibold text-cream">{{ post.title }}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">
+        <p class="text-[11px] text-muted sm:text-xs">{{ post.created_at.strftime('%b %d, %Y') }}</p>
+        <h3 class="mt-2 font-display text-base font-semibold text-cream sm:text-lg">{{ post.title }}</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           {{ post.body[:140] }}{% if post.body|length > 140 %}…{% endif %}
         </p>
       </article>
       {% endfor %}
     </div>
     <a href="{{ url_for('main.devlog') }}"
-      class="mt-6 block text-center text-sm font-semibold text-accent hover:text-accent-soft sm:hidden">
+      class="mt-6 block text-center text-xs font-semibold text-accent hover:text-accent-soft sm:hidden">
       Read all posts →
     </a>
   </div>
@@ -232,10 +236,10 @@
 {% endif %}
 
 <section class="border-b border-line">
-  <div class="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <p class="text-xs font-semibold uppercase tracking-wider text-accent">FAQ</p>
-    <h2 class="mt-2 font-display text-2xl font-bold sm:text-3xl">Frequently Asked Questions</h2>
-    <div class="mt-8 grid gap-4 sm:gap-6 md:grid-cols-2">
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Frequently Asked Questions</h2>
+    <div class="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-2">
       {% for faq in [
       {'q': 'Are there any games available to play right now?', 'a': 'Not yet! This site is currently tracking my solo
       dev journey from day one. Prototypes are in development, and updates will drop in the devlog.'},
@@ -246,13 +250,13 @@
       {'q': 'How can I follow the progress?', 'a': 'You can check out the devlog section regularly where I document code
       struggles, feature builds, and weekly progress.'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
         hover:-translate-y-1
         hover:border-accent
         hover:shadow-xl">
-        <h3 class="font-display text-base font-semibold text-cream">{{ faq.q }}</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted">{{ faq.a }}</p>
+        <h3 class="font-display text-sm font-semibold text-cream sm:text-base">{{ faq.q }}</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ faq.a }}</p>
       </div>
       {% endfor %}
     </div>
@@ -260,10 +264,10 @@
 </section>
 
 <section>
-  <div class="mx-auto max-w-6xl px-6 py-12 text-center sm:py-20">
-    <p class="text-sm font-medium uppercase tracking-wide text-muted">Built With</p>
+  <div class="mx-auto max-w-6xl px-4 py-10 text-center sm:py-20">
+    <p class="text-xs font-medium uppercase tracking-wide text-muted sm:text-sm">Built With</p>
     <div
-      class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 font-display text-base font-bold text-muted sm:gap-x-10 sm:text-lg">
+      class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-display text-sm font-bold text-muted sm:mt-8 sm:gap-x-10 sm:text-lg">
       <span>Python</span>
       <span>Flask</span>
       <span>Tailwind CSS</span>
