@@ -19,11 +19,11 @@
     </a>
 
     {% set links = [
-    ('main.index', 'Home'),
-    ('main.games', 'Games'),
-    ('main.about', 'About'),
-    ('main.devlog', 'Devlog'),
-    ('main.contact', 'Contact')
+      ('main.index', 'Home'),
+      ('main.games', 'Games'),
+      ('main.about', 'About'),
+      ('main.devlog', 'Devlog'),
+      ('main.contact', 'Contact')
     ] %}
 
     <!-- Desktop links -->
@@ -44,31 +44,30 @@
     <!-- Desktop auth -->
     <div class="hidden items-center gap-3 md:flex">
       {% if current_user.is_authenticated %}
-      {% if current_user.is_admin %}
-      <a href="{{ url_for('admin.dashboard') }}"
-        class="rounded-md px-3 py-2 text-sm font-medium text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
-      {% endif %}
-      <div class="flex items-center gap-2 border-l border-line pl-3">
-        <span class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold
-          {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
-          {{ current_user.username[0]|upper }}
-        </span>
-        <span class="text-sm text-muted">{{ current_user.username }}</span>
-      </div>
-      <a href="{{ url_for('auth.logout') }}"
-        class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log
-        out</a>
+        {% if current_user.is_admin %}
+        <a href="{{ url_for('admin.dashboard') }}"
+          class="rounded-md px-3 py-2 text-sm font-medium text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
+        {% endif %}
+        <div class="flex items-center gap-2 border-l border-line pl-3">
+          <span class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold
+            {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
+            {{ current_user.username[0]|upper }}
+          </span>
+          <span class="text-sm text-muted">{{ current_user.username }}</span>
+        </div>
+        <a href="{{ url_for('auth.logout') }}"
+          class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log out</a>
       {% else %}
-      <a href="{{ url_for('auth.login') }}"
-        class="rounded-md px-3 py-2 text-sm font-medium text-muted hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
-      <a href="{{ url_for('auth.register') }}"
-        class="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink transition hover:bg-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-cream">Sign
-        up</a>
+        <a href="{{ url_for('auth.login') }}"
+          class="rounded-md px-3 py-2 text-sm font-medium text-muted hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
+        <a href="{{ url_for('auth.register') }}"
+          class="inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink transition hover:bg-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-cream">Sign up</a>
       {% endif %}
     </div>
 
     <!-- Hamburger -->
     <button id="nav-toggle"
+      type="button"
       class="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
       aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-drawer">
       <span class="sr-only">Menu</span>
@@ -86,7 +85,7 @@
 
 <!-- Backdrop -->
 <div id="nav-backdrop"
-  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 md:hidden">
+  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 md:hidden">
 </div>
 
 <!-- Slide-in drawer -->
@@ -98,7 +97,7 @@
       {% for endpoint, label in links %}
       <a href="{{ url_for(endpoint) }}"
         {% if request.endpoint == endpoint %}aria-current="page"{% endif %}
-        class="drawer-link rounded-md px-3 py-3 text-base font-medium opacity-0 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent
+        class="drawer-link rounded-md px-3 py-3 text-base font-medium opacity-0 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent
           {% if request.endpoint == endpoint %}text-accent{% else %}text-muted hover:text-accent hover:bg-surface{% endif %}">
         {{ label }}
       </a>
@@ -109,26 +108,24 @@
 
     <div class="flex flex-col gap-2">
       {% if current_user.is_authenticated %}
-      <div class="drawer-link mb-2 flex items-center gap-3 px-3 opacity-0">
-        <span class="flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold
-          {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
-          {{ current_user.username[0]|upper }}
-        </span>
-        <span class="text-sm text-cream">{{ current_user.username }}</span>
-      </div>
-      {% if current_user.is_admin %}
-      <a href="{{ url_for('admin.dashboard') }}"
-        class="drawer-link rounded-md px-3 py-3 text-base font-medium text-accent opacity-0 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
-      {% endif %}
-      <a href="{{ url_for('auth.logout') }}"
-        class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-cream opacity-0 transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log
-        out</a>
+        <div class="drawer-link mb-2 flex items-center gap-3 px-3 opacity-0">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold
+            {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
+            {{ current_user.username[0]|upper }}
+          </span>
+          <span class="text-sm text-cream">{{ current_user.username }}</span>
+        </div>
+        {% if current_user.is_admin %}
+        <a href="{{ url_for('admin.dashboard') }}"
+          class="drawer-link rounded-md px-3 py-3 text-base font-medium text-accent opacity-0 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}"
+          class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-cream opacity-0 transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log out</a>
       {% else %}
-      <a href="{{ url_for('auth.login') }}"
-        class="drawer-link rounded-md px-3 py-3 text-base font-medium text-muted opacity-0 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
-      <a href="{{ url_for('auth.register') }}"
-        class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-ink opacity-0 transition hover:bg-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-cream">Sign
-        up</a>
+        <a href="{{ url_for('auth.login') }}"
+          class="drawer-link rounded-md px-3 py-3 text-base font-medium text-muted opacity-0 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
+        <a href="{{ url_for('auth.register') }}"
+          class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-ink opacity-0 transition hover:bg-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-cream">Sign up</a>
       {% endif %}
     </div>
   </div>
@@ -139,6 +136,8 @@
   const toggle = document.getElementById('nav-toggle');
   const drawer = document.getElementById('nav-drawer');
   const backdrop = document.getElementById('nav-backdrop');
+  if (!toggle || !drawer || !backdrop) return;
+
   const bars = toggle.querySelectorAll('.bar');
   const drawerLinks = drawer.querySelectorAll('.drawer-link');
   let lastFocused = null;
@@ -148,18 +147,20 @@
     toggle.setAttribute('aria-expanded', 'true');
     drawer.setAttribute('aria-hidden', 'false');
     drawer.classList.remove('translate-x-full');
+
     backdrop.classList.remove('hidden');
     requestAnimationFrame(() => backdrop.classList.remove('opacity-0'));
     document.body.style.overflow = 'hidden';
 
-    bars[0].style.transform = 'translateY(7px) rotate(45deg)';
-    bars[1].style.opacity = '0';
-    bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+    if (bars && bars.length >= 3) {
+      bars[0].style.transform = 'translateY(7px) rotate(45deg)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+    }
 
     drawerLinks.forEach((el, i) => {
-      el.style.transitionDelay = (i * 40) + 'ms';
-      el.classList.add('transition-opacity');
-      requestAnimationFrame(() => el.classList.remove('opacity-0'));
+      el.style.transitionDelay = (i * 35) + 'ms';
+      el.classList.remove('opacity-0');
     });
 
     const first = drawer.querySelector('a, button');
@@ -173,34 +174,55 @@
     backdrop.classList.add('opacity-0');
     document.body.style.overflow = '';
 
-    bars[0].style.transform = '';
-    bars[1].style.opacity = '';
-    bars[2].style.transform = '';
+    if (bars && bars.length >= 3) {
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '1';
+      bars[2].style.transform = '';
+    }
 
-    drawerLinks.forEach(el => el.classList.add('opacity-0'));
+    drawerLinks.forEach(el => {
+      el.style.transitionDelay = '0ms';
+      el.classList.add('opacity-0');
+    });
 
-    setTimeout(() => backdrop.classList.add('hidden'), 300);
+    setTimeout(() => {
+      if (toggle.getAttribute('aria-expanded') !== 'true') {
+        backdrop.classList.add('hidden');
+      }
+    }, 300);
+
     if (lastFocused) lastFocused.focus();
   }
 
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     toggle.getAttribute('aria-expanded') === 'true' ? close() : open();
   });
+
   backdrop.addEventListener('click', close);
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') close();
   });
 
-  // basic focus trap
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', close);
+  });
+
+  // Focus trap
   drawer.addEventListener('keydown', (e) => {
     if (e.key !== 'Tab') return;
-    const focusable = drawer.querySelectorAll('a, button');
-    const list = Array.from(focusable);
-    const first = list[0], last = list[list.length - 1];
+    const focusable = Array.from(drawer.querySelectorAll('a[href], button:not([disabled])'));
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
     if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault(); last.focus();
+      e.preventDefault();
+      last.focus();
     } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault(); first.focus();
+      e.preventDefault();
+      first.focus();
     }
   });
 })();
