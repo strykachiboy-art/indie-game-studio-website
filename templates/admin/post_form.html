@@ -9,14 +9,14 @@
   {{ form.hidden_tag() }}
   <div>
     <label for="title" class="mb-1 block text-sm text-muted">Title</label>
-    {{ form.title(id="title", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream placeholder-muted
+    {{ form.title(id="title", autofocus=True, class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream placeholder-muted
     focus:border-accent focus:outline-none", placeholder="Post title") }}
     {% for e in form.title.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
   </div>
   <div>
     <label for="body" class="mb-1 block text-sm text-muted">Body</label>
-    {{ form.body(id="body", rows="10", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-    placeholder-muted focus:border-accent focus:outline-none sm:rows-12", placeholder="Write your post…") }}
+    {{ form.body(id="body", rows="10", class="w-full resize-y rounded-lg border border-line bg-ink px-4 py-3 text-cream
+    placeholder-muted focus:border-accent focus:outline-none min-h-[220px] sm:min-h-[360px]", placeholder="Write your post…") }}
     {% for e in form.body.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
   </div>
   <label class="flex items-center gap-2 text-sm text-muted">

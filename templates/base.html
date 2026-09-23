@@ -1,89 +1,138 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-ink">
+// js/main.js
+document.addEventListener('DOMContentLoaded', function () {
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}StrykaMax Studio{% endblock %}</title>
-  <meta name="description" content="StrykaMax is an indie game studio crafting bold, handmade worlds." />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
-</head>
+  /* ---------- Nav drawer (nav.html) ---------- */
+  const toggle = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('nav-drawer');
+  const backdrop = document.getElementById('nav-backdrop');
 
-<body class="min-h-screen bg-ink font-sans text-cream antialiased">
-  {% include "partials/navbar.html" %}
+  if (toggle && drawer && backdrop) {
+    const bars = toggle.querySelectorAll('.bar');
+    const drawerLinks = drawer.querySelectorAll('.drawer-link');
+    let lastFocused = null;
 
-  <main>
-    {% include "partials/flashes.html" %}
-    {% block content %}{% endblock %}
-  </main>
+    function openDrawer() {
+      lastFocused = document.activeElement;
+      toggle.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      drawer.classList.remove('translate-x-full');
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => backdrop.classList.remove('opacity-0'));
+      document.body.style.overflow = 'hidden';
 
-  {% block footer %}
-  <footer class="border-t border-line bg-ink">
-    <div class="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
-      <div class="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-        <!-- Brand -->
-        <div class="max-w-xs">
-          <a href="{{ url_for('main.index') }}" class="inline-flex items-center">
-            <svg viewBox="0 0 194 32" fill="none" role="img" aria-label="StrykaMax" class="h-7 w-auto">
-              <g>
-                <polygon points="2,30 9,30 15,2 8,2" fill="#A3E635" />
-                <polygon points="16,30 23,30 27,11 20,11" fill="#A3E635" fill-opacity="0.72" />
-                <polygon points="30,30 37,30 39,20 32,20" fill="#A3E635" fill-opacity="0.42" />
-              </g>
-              <text x="52" y="23" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="19"
-                letter-spacing="0.5" fill="#F4F1EA">STRYKA<tspan fill="#A3E635">MAX</tspan></text>
-            </svg>
-          </a>
-          <p class="mt-4 text-sm leading-relaxed text-muted">
-            A solo indie game development journey — built with Python and
-            Flask, learning and shipping in the open.
-          </p>
-        </div>
+      bars[0].style.transform = 'translateY(7px) rotate(45deg)';
+      bars[1].style.opacity = '0';
+      bars[2].style.transform = 'translateY(-7px) rotate(-45deg)';
 
-        <!-- Nav -->
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-wider text-muted">Site</p>
-          <div class="mt-4 flex flex-col gap-2">
-            {% set footer_links = [
-            ('main.index', 'Home'),
-            ('main.games', 'Games'),
-            ('main.about', 'About'),
-            ('main.devlog', 'Devlog'),
-            ('main.contact', 'Contact')
-            ] %}
-            {% for endpoint, label in footer_links %}
-            <a href="{{ url_for(endpoint) }}" class="text-sm text-muted transition-colors hover:text-accent">{{ label
-              }}</a>
-            {% endfor %}
-          </div>
-        </div>
+      drawerLinks.forEach((el, i) => {
+        el.style.transitionDelay = (i * 40) + 'ms';
+        el.classList.add('transition-opacity');
+        requestAnimationFrame(() => el.classList.remove('opacity-0'));
+      });
 
-        <!-- Get in touch -->
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-wider text-muted">Get in touch</p>
-          <div class="mt-4 flex flex-col gap-2">
-            <a href="{{ url_for('main.contact') }}"
-              class="text-sm text-muted transition-colors hover:text-accent">Freelance inquiries</a>
-            <a href="{{ url_for('main.contact') }}" class="text-sm text-muted transition-colors hover:text-accent">Say
-              hello</a>
-          </div>
-        </div>
-      </div>
+      const first = drawer.querySelector('a, button');
+      if (first) first.focus();
+    }
 
-      <div
-        class="mt-10 flex flex-col gap-3 border-t border-line pt-6 sm:mt-14 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-xs text-muted">&copy; {{ current_year }} StrykaMax Studio. Built solo, one commit at a time.</p>
-        <p class="text-xs text-muted">No games shipped yet — <a href="{{ url_for('main.devlog') }}"
-            class="text-accent hover:underline">follow the devlog</a> to watch that change.</p>
-      </div>
-    </div>
-  </footer>
-  {% endblock %}
+    function closeDrawer() {
+      toggle.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('opacity-0');
+      document.body.style.overflow = '';
 
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-  {% block scripts %}{% endblock %}
-</body>
+      bars[0].style.transform = '';
+      bars[1].style.opacity = '';
+      bars[2].style.transform = '';
 
-</html>
+      drawerLinks.forEach(el => el.classList.add('opacity-0'));
+      setTimeout(() => backdrop.classList.add('hidden'), 300);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    toggle.addEventListener('click', () => {
+      toggle.getAttribute('aria-expanded') === 'true' ? closeDrawer() : openDrawer();
+    });
+    backdrop.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') closeDrawer();
+    });
+    drawer.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const list = Array.from(drawer.querySelectorAll('a, button'));
+      const first = list[0], last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  }
+
+  /* ---------- Password visibility toggles (login/register) ---------- */
+  document.querySelectorAll('[data-pw-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const field = btn.previousElementSibling;
+      field.type = field.type === 'password' ? 'text' : 'password';
+    });
+  });
+
+  /* ---------- Password strength meter (register) ---------- */
+  const pwField = document.querySelector('[data-pw-strength]');
+  if (pwField) {
+    const bars = [1, 2, 3, 4].map(n => document.getElementById(`pw-bar-${n}`));
+    const label = document.getElementById('pw-label');
+    const colors = { weak: '#f87171', okay: '#facc15', good: '#4ade80', strong: 'var(--color-accent, #4ade80)' };
+
+    pwField.addEventListener('input', () => {
+      const value = pwField.value;
+      bars.forEach(b => b.style.backgroundColor = '');
+      if (!value) { label.textContent = '\u00A0'; return; }
+
+      let score = 0;
+      if (value.length >= 8) score++;
+      if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
+      if (/\d/.test(value)) score++;
+      if (/[^A-Za-z0-9]/.test(value)) score++;
+
+      const levels = [
+        { key: 'weak', text: 'Weak' }, { key: 'okay', text: 'Okay' },
+        { key: 'good', text: 'Good' }, { key: 'strong', text: 'Strong' },
+      ];
+      const level = levels[Math.max(0, score - 1)];
+      for (let i = 0; i < score; i++) bars[i].style.backgroundColor = colors[level.key];
+      label.textContent = level.text;
+    });
+  }
+
+  /* ---------- Flash message dismiss / auto-dismiss ---------- */
+  document.querySelectorAll('[data-flash]').forEach(el => {
+    const btn = el.querySelector('[data-flash-dismiss]');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 300);
+      });
+    }
+    if (el.dataset.autodismiss === 'true') {
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 300);
+      }, 4000);
+    }
+  });
+
+  /* ---------- Scroll reveal (homepage, about, etc.) ---------- */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealTargets = document.querySelectorAll('.reveal');
+  if (revealTargets.length && !prefersReducedMotion && 'IntersectionObserver' in window) {
+    revealTargets.forEach(el => el.classList.add('opacity-0', 'translate-y-3', 'transition-all', 'duration-700'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-3');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach(el => io.observe(el));
+  }
+
+});

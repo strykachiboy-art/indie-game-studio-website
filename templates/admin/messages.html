@@ -8,7 +8,7 @@
 
 <div class="mt-6 grid gap-4">
   {% for m in messages %}
-  <div class="rounded-2xl border border-line bg-surface p-5 {% if not m.is_read %}ring-1 ring-ember/30{% endif %}">
+  <div id="msg-{{ m.id }}" class="scroll-mt-24 rounded-2xl border border-line bg-surface p-5 {% if not m.is_read %}ring-1 ring-ember/30{% endif %}">
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div class="min-w-0">
         <p class="font-medium text-cream">
@@ -28,8 +28,9 @@
         </form>
         <form method="POST" action="{{ url_for('admin.delete_message', message_id=m.id) }}"
           onsubmit="return confirm('Delete this message?');">
-          <button
-            class="rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 hover:bg-red-500/10">Delete</button>
+          <button class="rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 hover:bg-red-500/10">
+            Delete
+          </button>
         </form>
       </div>
     </div>

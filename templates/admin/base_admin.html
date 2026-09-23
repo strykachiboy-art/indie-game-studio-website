@@ -6,11 +6,11 @@
 <div class="mx-auto max-w-6xl px-6 py-10">
   <div class="flex flex-col gap-8 md:flex-row">
     <!-- Sidebar -->
-    <aside class="md:w-56 md:shrink-0">
+    <aside class="md:w-56 md:shrink-0 md:sticky md:top-10 md:self-start">
       <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-accent">
         Admin
       </p>
-      <nav class="flex flex-row flex-wrap gap-1 md:flex-col">
+      <nav class="flex flex-row gap-1 overflow-x-auto md:flex-col md:overflow-visible">
         {% set nav = [
         ('admin.dashboard', 'Overview'),
         ('admin.users', 'Users'),
@@ -19,8 +19,13 @@
         ] %}
         {% for endpoint, label in nav %}
         <a href="{{ url_for(endpoint) }}"
-          class="rounded-lg px-3 py-2 text-sm font-medium transition
-            {% if request.endpoint == endpoint %}bg-accent text-ink{% else %}text-muted hover:bg-surface hover:text-cream{% endif %}">
+          {% if request.endpoint == endpoint %}aria-current="page"{% endif %}
+          class="shrink-0 rounded-lg border-l-2 px-3 py-2 text-sm font-medium transition
+            {% if request.endpoint == endpoint %}
+              border-accent bg-accent text-ink
+            {% else %}
+              border-transparent text-muted hover:bg-surface hover:text-cream
+            {% endif %}">
           {{ label }}
         </a>
         {% endfor %}

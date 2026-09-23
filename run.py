@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
 # npx @tailwindcss/cli -i ./src/input.css -o ./static/css/output.css --minify
 
-# git add .
-# git commit -m "update tailwind styles"
-# git push
+# & "C:\msys64\mingw64\bin\git.exe" add .
+# & "C:\msys64\mingw64\bin\git.exe" commit -m "update tailwind styles"
+# & "C:\msys64\mingw64\bin\git.exe" push
 

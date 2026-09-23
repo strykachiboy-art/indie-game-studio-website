@@ -3,166 +3,142 @@
 
 {% block content %}
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Catalog</p>
-        <h1 class="mt-2 font-display text-2xl font-bold leading-tight sm:text-4xl md:text-5xl">Games &amp; Prototypes
-        </h1>
-        <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
-            No commercial titles shipped yet — this page tracks active prototypes,
-            code experiments, and work-in-progress projects openly from first idea
-            to eventual release.
-        </p>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Catalog</p>
+    <h1 class="mt-2 font-display text-2xl font-bold leading-tight sm:text-4xl md:text-5xl">Games &amp; Prototypes</h1>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
+      No commercial titles shipped yet — this page tracks active prototypes,
+      code experiments, and work-in-progress projects openly from first idea
+      to eventual release.
+    </p>
 
-        <div class="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:max-w-xl sm:grid-cols-4 sm:gap-4">
-            {% for stat in [
-            {'n': '0', 'l': 'Games Shipped'},
-            {'n': '1', 'l': 'Active Prototype'},
-            {'n': '2026', 'l': 'Journey Started'},
-            {'n': '100%', 'l': 'Real Status'}
-            ] %}
-            <div class="rounded-2xl border border-line bg-surface p-3 text-center sm:p-4">
-                <p class="font-display text-lg font-bold text-accent sm:text-2xl">{{ stat.n }}</p>
-                <p class="mt-1 text-[11px] text-muted sm:text-xs">{{ stat.l }}</p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div class="mt-8 rounded-2xl border border-dashed border-line bg-surface p-5 text-center sm:mt-10 sm:p-12">
-            <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Workbench
-                Status</span>
-            <h2 class="mt-3 font-display text-lg font-bold text-cream sm:mt-4 sm:text-xl">Building the first playable
-                prototype</h2>
-            <p class="mx-auto mt-2 max-w-md text-xs leading-relaxed text-muted sm:text-sm">
-                There are no public game builds available to download or play just yet.
-                Right now, the focus is on laying down core game loop logic and polishing this backend devlog.
-            </p>
-            <div class="mt-5 flex flex-wrap justify-center gap-3 sm:mt-6">
-                <a href="{{ url_for('main.devlog') }}" class="rounded-xl bg-accent px-5 py-2.5 text-center text-xs font-semibold text-ink
-                    transition-all duration-300 hover:scale-[1.02]
-                    hover:bg-accent-soft active:scale-95 sm:px-6 sm:py-3 sm:text-sm">
-                    Follow the devlog
-                </a>
-                <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-5 py-2.5 text-center text-xs
-                    font-medium text-cream transition-all duration-300
-                    hover:border-accent hover:-translate-y-0.5 sm:px-6 sm:py-3 sm:text-sm">
-                    Say hello
-                </a>
-            </div>
-        </div>
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:max-w-xl sm:grid-cols-4 sm:gap-4">
+      {% set projects_count = projects|length if projects is not none else 0 %}
+      {% for stat in [
+        {'n': '0', 'l': 'Games Shipped'},
+        {'n': projects_count, 'l': 'Active Prototype'},
+        {'n': '2026', 'l': 'Journey Started'},
+        {'n': '100%', 'l': 'Real Status'}
+      ] %}
+      <div class="rounded-2xl border border-line bg-surface p-3 text-center sm:p-4">
+        <p class="font-display text-lg font-bold text-accent sm:text-2xl">{{ stat.n }}</p>
+        <p class="mt-1 text-[11px] text-muted sm:text-xs">{{ stat.l }}</p>
+      </div>
+      {% endfor %}
     </div>
+
+    <div class="mt-8 rounded-2xl border border-dashed border-line bg-surface p-5 text-center sm:mt-10 sm:p-12">
+      <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Workbench Status</span>
+      <h2 class="mt-3 font-display text-lg font-bold text-cream sm:mt-4 sm:text-xl">Building the first playable prototype</h2>
+      <p class="mx-auto mt-2 max-w-md text-xs leading-relaxed text-muted sm:text-sm">
+        There are no public game builds available to download or play just yet.
+        Right now, the focus is on laying down core game loop logic and polishing this backend devlog.
+      </p>
+      <div class="mt-5 flex flex-wrap justify-center gap-3 sm:mt-6">
+        <a href="{{ url_for('main.devlog') }}" class="rounded-xl bg-accent px-5 py-2.5 text-center text-xs font-semibold text-ink transition-all duration-300 hover:scale-[1.02] hover:bg-accent-soft active:scale-95 sm:px-6 sm:py-3 sm:text-sm">
+          Follow the devlog
+        </a>
+        <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-5 py-2.5 text-center text-xs font-medium text-cream transition-all duration-300 hover:border-accent hover:-translate-y-0.5 sm:px-6 sm:py-3 sm:text-sm">
+          Say hello
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Honest status</p>
-        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Why this page is clean</h2>
-        <div class="mt-6 grid gap-6 sm:mt-8 sm:gap-8 md:grid-cols-2">
-            <p class="text-xs leading-relaxed text-muted sm:text-base">
-                No finished game exists yet, and this page refuses to use vaporware
-                or fake concept art to look bigger than it is. It reflects the exact state
-                of development: a solo developer building from day one.
-            </p>
-            <p class="text-xs leading-relaxed text-muted sm:text-base">
-                Behind the scenes, everyday work involves learning Python and Flask best practices,
-                testing small browser-based mechanics, and building the structural discipline needed
-                to actually ship a complete project someday.
-            </p>
-        </div>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Honest status</p>
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Why this page is clean</h2>
+    <div class="mt-6 grid gap-6 sm:mt-8 sm:gap-8 md:grid-cols-2">
+      <p class="text-xs leading-relaxed text-muted sm:text-base">
+        No finished game exists yet, and this page refuses to use vaporware
+        or fake concept art to look bigger than it is. It reflects the exact state
+        of development: a solo developer building from day one.
+      </p>
+      <p class="text-xs leading-relaxed text-muted sm:text-base">
+        Behind the scenes, everyday work involves learning Python and Flask best practices,
+        testing small browser-based mechanics, and building the structural discipline needed
+        to actually ship a complete project someday.
+      </p>
     </div>
+  </div>
 </section>
 
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Exploring</p>
-        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Ideas on the workbench</h2>
-        <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
-            None of these are finalized titles — just concepts and technologies being
-            tested to figure out what a first game project should look like.
-        </p>
-        <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
-            {% for idea in [
-            {'t': 'Browser Prototypes', 'd': 'Lightweight, interactive web elements built directly into the Flask
-            environment for fast testing.'},
-            {'t': 'Tight Core Mechanics', 'd': 'Focusing on mastering single foundational systems instead of designing
-            bloated, unmanageable scopes.'},
-            {'t': 'System Performance', 'd': 'Exploring systems programming concepts and performance structures for
-            future game logic.'}
-            ] %}
-            <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:border-accent
-                hover:shadow-xl">
-                <h3 class="font-display text-base font-semibold text-accent sm:text-lg">{{ idea.t }}</h3>
-                <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ idea.d }}</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Exploring</p>
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Ideas on the workbench</h2>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
+      None of these are finalized titles — just concepts and technologies being
+      tested to figure out what a first game project should look like.
+    </p>
+
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
+      {% for idea in [
+        {'t': 'Browser Prototypes', 'd': 'Lightweight, interactive web elements built directly into the Flask environment for fast testing.'},
+        {'t': 'Tight Core Mechanics', 'd': 'Focusing on mastering single foundational systems instead of designing bloated, unmanageable scopes.'},
+        {'t': 'System Performance', 'd': 'Exploring systems programming concepts and performance structures for future game logic.'}
+      ] %}
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl">
+        <h3 class="font-display text-base font-semibold text-accent sm:text-lg">{{ idea.t }}</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ idea.d }}</p>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Process</p>
-        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">How a project gets built here</h2>
-        <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
-            This is the framework being followed to move from raw code experiments
-            to an actual playable release.
-        </p>
-        <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-4">
-            {% for stage in [
-            {'n': '01', 't': 'Prototype', 'd': 'Scrappy, fast code used exclusively to test if a core mechanic is
-            fun.'},
-            {'n': '02', 't': 'Vertical Slice', 'd': 'Isolating one polished gameplay loop to prove the concept works
-            end-to-end.'},
-            {'n': '03', 't': 'Expansion', 'd': 'Adding structure, progression, and interface elements once the loop is
-            solid.'},
-            {'n': '04', 't': 'Shipping', 'd': 'Releasing whatever is built, taking the lessons learned directly into the
-            next idea.'}
-            ] %}
-            <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:border-accent
-                hover:shadow-xl">
-                <p class="font-display text-xl font-bold text-accent sm:text-2xl">{{ stage.n }}</p>
-                <h3 class="mt-2 text-xs font-semibold text-cream sm:text-sm">{{ stage.t }}</h3>
-                <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ stage.d }}</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Process</p>
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">How a project gets built here</h2>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
+      This is the framework being followed to move from raw code experiments
+      to an actual playable release.
+    </p>
+
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-4">
+      {% for stage in [
+        {'n': '01', 't': 'Prototype', 'd': 'Scrappy, fast code used exclusively to test if a core mechanic is fun.'},
+        {'n': '02', 't': 'Vertical Slice', 'd': 'Isolating one polished gameplay loop to prove the concept works end-to-end.'},
+        {'n': '03', 't': 'Expansion', 'd': 'Adding structure, progression, and interface elements once the loop is solid.'},
+        {'n': '04', 't': 'Shipping', 'd': 'Releasing whatever is built, taking the lessons learned directly into the next idea.'}
+      ] %}
+      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl">
+        <p class="font-display text-xl font-bold text-accent sm:text-2xl">{{ stage.n }}</p>
+        <h3 class="mt-2 text-xs font-semibold text-cream sm:text-sm">{{ stage.t }}</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ stage.d }}</p>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 <section>
-    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
-        <p class="text-xs font-semibold uppercase tracking-wider text-accent">Keep exploring</p>
-        <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">See more of the journey</h2>
-        <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
-            An empty game catalog is only the starting point. Check out the rest of the workspace.
-        </p>
-        <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
-            <a href="{{ url_for('main.devlog') }}"
-                class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
-                <h3 class="font-display text-base font-semibold text-accent sm:text-lg">Devlog</h3>
-                <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Daily progress, code hurdles, and building
-                    notes as
-                    they happen.</p>
-            </a>
-            <a href="{{ url_for('main.about') }}"
-                class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
-                <h3 class="font-display text-base font-semibold text-accent sm:text-lg">About</h3>
-                <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Who is behind StrykaMax Studio and why
-                    building solo
-                    matters.</p>
-            </a>
-            <a href="{{ url_for('main.contact') }}"
-                class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
-                <h3 class="font-display text-base font-semibold text-accent sm:text-lg">Get in touch</h3>
-                <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Drop feedback, share ideas, or just say
-                    hello.</p>
-            </a>
-        </div>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
+    <p class="text-xs font-semibold uppercase tracking-wider text-accent">Keep exploring</p>
+    <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">See more of the journey</h2>
+    <p class="mt-3 max-w-2xl text-xs leading-relaxed text-muted sm:mt-4 sm:text-base">
+      An empty game catalog is only the starting point. Check out the rest of the workspace.
+    </p>
+
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
+      <a href="{{ url_for('main.devlog') }}" class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6" aria-label="Devlog">
+        <h3 class="font-display text-base font-semibold text-accent sm:text-lg">Devlog</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Daily progress, code hurdles, and building notes as they happen.</p>
+      </a>
+
+      <a href="{{ url_for('main.about') }}" class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6" aria-label="About">
+        <h3 class="font-display text-base font-semibold text-accent sm:text-lg">About</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Who is behind StrykaMax Studio and why building solo matters.</p>
+      </a>
+
+      <a href="{{ url_for('main.contact') }}" class="rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6" aria-label="Contact">
+        <h3 class="font-display text-base font-semibold text-accent sm:text-lg">Get in touch</h3>
+        <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">Drop feedback, share ideas, or just say hello.</p>
+      </a>
     </div>
+  </div>
 </section>
 {% endblock %}

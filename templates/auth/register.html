@@ -7,30 +7,79 @@
   <h1 class="mt-2 font-display text-3xl font-bold">Create your account</h1>
   <p class="mt-2 text-muted">Join the StrykaMax community.</p>
 
-  <form method="POST" class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-5 sm:p-8">
+  <form method="POST"
+    class="mt-8 grid gap-4 rounded-2xl border border-line bg-surface p-5 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.6)] sm:p-8">
     {{ form.hidden_tag() }}
+
     <div>
       <label for="username" class="mb-1 block text-sm text-muted">Username</label>
-      {{ form.username(id="username", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-      placeholder-muted focus:border-accent focus:outline-none", placeholder="playername") }}
+      <div class="relative">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted">
+          <path fill-rule="evenodd" d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-7 8a7 7 0 1 1 14 0H3Z" clip-rule="evenodd" />
+        </svg>
+        {{ form.username(id="username", autocomplete="username", class="w-full rounded-lg border border-line bg-ink py-3 pl-10 pr-4 text-cream
+        placeholder-muted transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15", placeholder="playername") }}
+      </div>
+      {% for e in form.username.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
     </div>
+
     <div>
       <label for="email" class="mb-1 block text-sm text-muted">Email</label>
-      {{ form.email(id="email", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-      placeholder-muted focus:border-accent focus:outline-none", placeholder="you@example.com") }}
+      <div class="relative">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted">
+          <path d="M3 4a2 2 0 0 0-2 2v.217l9 5.4 9-5.4V6a2 2 0 0 0-2-2H3Z" />
+          <path d="m19 8.383-9 5.4-9-5.4V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.383Z" />
+        </svg>
+        {{ form.email(id="email", autocomplete="email", class="w-full rounded-lg border border-line bg-ink py-3 pl-10 pr-4 text-cream
+        placeholder-muted transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15", placeholder="you@example.com") }}
+      </div>
+      {% for e in form.email.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
     </div>
+
     <div>
       <label for="password" class="mb-1 block text-sm text-muted">Password</label>
-      {{ form.password(id="password", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-      placeholder-muted focus:border-accent focus:outline-none", placeholder="At least 8 characters") }}
+      <div class="relative">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted">
+          <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+        </svg>
+        {{ form.password(id="password", autocomplete="new-password", oninput="strykaPwStrength(this.value)", class="w-full rounded-lg border border-line bg-ink py-3 pl-10 pr-11 text-cream
+        placeholder-muted transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15", placeholder="At least 8 characters") }}
+        <button type="button" onclick="const f=this.previousElementSibling; f.type = f.type === 'password' ? 'text' : 'password';"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-muted transition-colors hover:text-cream" aria-label="Show password">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
+            <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+            <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.147.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-2 flex gap-1">
+        <span id="pw-bar-1" class="h-1 flex-1 rounded-full bg-line transition-colors"></span>
+        <span id="pw-bar-2" class="h-1 flex-1 rounded-full bg-line transition-colors"></span>
+        <span id="pw-bar-3" class="h-1 flex-1 rounded-full bg-line transition-colors"></span>
+        <span id="pw-bar-4" class="h-1 flex-1 rounded-full bg-line transition-colors"></span>
+      </div>
+      <p id="pw-label" class="mt-1 text-xs text-muted">&nbsp;</p>
+      {% for e in form.password.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
     </div>
+
     <div>
       <label for="confirm" class="mb-1 block text-sm text-muted">Confirm password</label>
-      {{ form.confirm(id="confirm", class="w-full rounded-lg border border-line bg-ink px-4 py-3 text-cream
-      placeholder-muted focus:border-accent focus:outline-none", placeholder="Repeat password") }}
+      <div class="relative">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+          class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted">
+          <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+        </svg>
+        {{ form.confirm(id="confirm", autocomplete="new-password", class="w-full rounded-lg border border-line bg-ink py-3 pl-10 pr-4 text-cream
+        placeholder-muted transition-colors focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15", placeholder="Repeat password") }}
+      </div>
+      {% for e in form.confirm.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
     </div>
-    {{ form.submit(class="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition
-    hover:bg-accent-soft cursor-pointer") }}
+
+    {{ form.submit(class="w-full rounded-lg bg-accent px-6 py-3 font-semibold text-ink transition-all
+    hover:bg-accent-soft hover:shadow-[0_8px_24px_-6px_theme(colors.accent/50%)] cursor-pointer") }}
   </form>
 
   <p class="mt-6 text-center text-sm text-muted">
@@ -38,4 +87,33 @@
     <a href="{{ url_for('auth.login') }}" class="font-medium text-accent hover:underline">Log in</a>
   </p>
 </section>
+
+<script>
+function strykaPwStrength(value) {
+  const bars = [1, 2, 3, 4].map(n => document.getElementById(`pw-bar-${n}`));
+  const label = document.getElementById('pw-label');
+  const colors = { weak: '#f87171', okay: '#facc15', good: '#4ade80', strong: 'var(--color-accent, #4ade80)' };
+
+  bars.forEach(b => b.style.backgroundColor = '');
+
+  if (!value) { label.textContent = '\u00A0'; return; }
+
+  let score = 0;
+  if (value.length >= 8) score++;
+  if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
+  if (/\d/.test(value)) score++;
+  if (/[^A-Za-z0-9]/.test(value)) score++;
+
+  const levels = [
+    { key: 'weak', text: 'Weak' },
+    { key: 'okay', text: 'Okay' },
+    { key: 'good', text: 'Good' },
+    { key: 'strong', text: 'Strong' },
+  ];
+  const level = levels[Math.max(0, score - 1)];
+
+  for (let i = 0; i < score; i++) bars[i].style.backgroundColor = colors[level.key];
+  label.textContent = level.text;
+}
+</script>
 {% endblock %}

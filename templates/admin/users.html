@@ -7,37 +7,49 @@
 <p class="mt-1 text-sm text-muted">Manage accounts and admin access.</p>
 
 <!-- Mobile: card list -->
-<div class="mt-6 grid gap-4 sm:hidden">
+<div class="mt-6 overflow-hidden rounded-2xl border border-line bg-surface sm:hidden">
   {% for user in users %}
-  <div class="rounded-2xl border border-line bg-surface p-4">
+  <div class="border-line p-4 transition-colors {% if not loop.first %}border-t{% endif %}">
     <div class="flex items-start justify-between gap-3">
-      <div class="min-w-0">
-        <p class="truncate font-medium text-cream">{{ user.username }}</p>
-        <p class="truncate text-sm text-muted">{{ user.email }}</p>
+      <div class="flex min-w-0 items-center gap-3">
+        <div class="flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold
+          {% if user.is_admin %}bg-accent/20 text-accent{% else %}bg-ink text-muted{% endif %}">
+          {{ user.username[0]|upper }}
+        </div>
+        <div class="min-w-0">
+          <p class="truncate font-medium text-cream">{{ user.username }}</p>
+          <p class="truncate text-sm text-muted">{{ user.email }}</p>
+        </div>
       </div>
       {% if user.is_admin %}
-      <span class="shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">Admin</span>
+      <span class="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-accent">
+        <span class="size-1.5 rounded-full bg-accent shadow-[0_0_6px_theme(colors.accent)]"></span>
+        Admin
+      </span>
       {% else %}
-      <span class="shrink-0 rounded-full bg-ink px-2 py-0.5 text-xs text-muted">Member</span>
+      <span class="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-muted">
+        <span class="size-1.5 rounded-full bg-muted"></span>
+        Member
+      </span>
       {% endif %}
     </div>
     <p class="mt-2 text-xs text-muted">Joined {{ user.created_at.strftime('%b %d, %Y') }}</p>
     <div class="mt-4 flex items-center gap-2">
       <form method="POST" action="{{ url_for('admin.toggle_admin', user_id=user.id) }}" class="flex-1">
-        <button class="w-full rounded-md border border-line px-3 py-1.5 text-xs text-cream hover:border-accent">
+        <button class="w-full rounded-md border border-line px-3 py-1.5 text-xs text-cream transition-colors hover:border-accent hover:text-accent">
           {{ 'Revoke admin' if user.is_admin else 'Make admin' }}
         </button>
       </form>
       <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}"
         onsubmit="return confirm('Delete {{ user.username }}?');" class="flex-1">
-        <button class="w-full rounded-md border border-red-500/40 px-3 py-1.5 text-xs text-red-300 hover:bg-red-500/10">
+        <button class="w-full rounded-md border border-red-500/40 px-3 py-1.5 text-xs text-red-300 transition-colors hover:bg-red-500/10">
           Delete
         </button>
       </form>
     </div>
   </div>
   {% else %}
-  <div class="rounded-2xl border border-line bg-surface p-8 text-center text-muted">
+  <div class="p-8 text-center text-muted">
     No users found.
   </div>
   {% endfor %}
@@ -48,36 +60,56 @@
   <table class="w-full min-w-[640px] text-left text-sm">
     <thead class="border-b border-line text-xs uppercase tracking-wider text-muted">
       <tr>
-        <th class="px-4 py-3">User</th>
-        <th class="px-4 py-3">Email</th>
-        <th class="px-4 py-3">Role</th>
-        <th class="px-4 py-3">Joined</th>
-        <th class="px-4 py-3 text-right">Actions</th>
+        <th class="px-4 py-3 font-medium">User</th>
+        <th class="px-4 py-3 font-medium">Email</th>
+        <th class="px-4 py-3 font-medium">Role</th>
+        <th class="px-4 py-3 font-medium">Joined</th>
+        <th class="px-4 py-3 text-right font-medium">Actions</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-line">
       {% for user in users %}
-      <tr>
-        <td class="px-4 py-3 font-medium text-cream">{{ user.username }}</td>
+      <tr class="group transition-colors hover:bg-ink/40">
+        <td class="px-4 py-3">
+          <div class="flex items-center gap-3">
+            <div class="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold
+              {% if user.is_admin %}bg-accent/20 text-accent{% else %}bg-ink text-muted{% endif %}">
+              {{ user.username[0]|upper }}
+            </div>
+            <span class="font-medium text-cream transition-colors group-hover:text-accent">{{ user.username }}</span>
+          </div>
+        </td>
         <td class="px-4 py-3 text-muted">{{ user.email }}</td>
         <td class="px-4 py-3">
           {% if user.is_admin %}
-          <span class="rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent">Admin</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-accent">
+            <span class="size-1.5 rounded-full bg-accent shadow-[0_0_6px_theme(colors.accent)]"></span>
+            Admin
+          </span>
           {% else %}
-          <span class="rounded-full bg-ink px-2 py-0.5 text-xs text-muted">Member</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-muted">
+            <span class="size-1.5 rounded-full bg-muted"></span>
+            Member
+          </span>
           {% endif %}
         </td>
         <td class="px-4 py-3 text-muted">{{ user.created_at.strftime('%b %d, %Y') }}</td>
         <td class="px-4 py-3">
           <div class="flex items-center justify-end gap-2">
             <form method="POST" action="{{ url_for('admin.toggle_admin', user_id=user.id) }}">
-              <button class="rounded-md border border-line px-3 py-1 text-xs text-cream hover:border-accent">
+              <button class="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1 text-xs text-cream transition-colors hover:border-accent hover:text-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3.5">
+                  <path fill-rule="evenodd" d="M10 1a6 6 0 0 0-6 6v2.092A4.001 4.001 0 0 0 2 13v1a2 2 0 0 0 2 2h.083a3.001 3.001 0 0 0 5.834 0h.166a3.001 3.001 0 0 0 5.834 0H16a2 2 0 0 0 2-2v-1a4.001 4.001 0 0 0-2-3.908V7a6 6 0 0 0-6-6Zm-1.5 15a1.5 1.5 0 0 0 3 0h-3Z" clip-rule="evenodd" />
+                </svg>
                 {{ 'Revoke admin' if user.is_admin else 'Make admin' }}
               </button>
             </form>
             <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}"
               onsubmit="return confirm('Delete {{ user.username }}?');">
-              <button class="rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 hover:bg-red-500/10">
+              <button class="inline-flex items-center gap-1.5 rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 transition-colors hover:bg-red-500/10">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3.5">
+                  <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z" clip-rule="evenodd" />
+                </svg>
                 Delete
               </button>
             </form>

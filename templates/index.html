@@ -3,14 +3,14 @@
 
 {% block content %}
 <section class="relative overflow-hidden border-b border-line">
-  <div class="pointer-events-none absolute inset-0 opacity-30"
+  <div class="pointer-events-none absolute inset-0 opacity-30" aria-hidden="true"
     style="background-image: radial-gradient(circle at 20% 20%, #a3e63533, transparent 40%), radial-gradient(circle at 80% 0%, #ff8a5c22, transparent 35%);">
   </div>
-  <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-20 md:grid-cols-2 md:gap-10 md:py-28">
+  <div class="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-20 md:grid-cols-2 md:gap-10 md:py-28">
     <div>
       <span
         class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-accent">
-        <span class="h-2 w-2 rounded-full bg-accent"></span>
+        <span class="h-2 w-2 animate-pulse rounded-full bg-accent"></span>
         Solo indie devlog
       </span>
       <h1 class="mt-4 font-display text-2xl font-bold leading-tight text-balance sm:mt-6 sm:text-5xl md:text-6xl">
@@ -25,27 +25,27 @@
       </p>
       <div class="mt-4 flex flex-wrap gap-2 sm:mt-6">
         <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
-          🎮 Solo Developer
+          <span aria-hidden="true">🎮</span> Solo Developer
         </span>
         <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
-          🐍 Python
+          <span aria-hidden="true">🐍</span> Python
         </span>
         <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
-          🚀 Flask
+          <span aria-hidden="true">🚀</span> Flask
         </span>
         <span class="rounded-full border border-line px-3 py-1 text-[11px] text-muted sm:text-xs">
-          🎨 Tailwind CSS
+          <span aria-hidden="true">🎨</span> Tailwind CSS
         </span>
       </div>
       <div class="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
         <a href="{{ url_for('main.devlog') }}" class="rounded-xl bg-accent px-5 py-2.5 text-center text-xs font-semibold text-ink
           transition-all duration-300 hover:scale-[1.02]
-          hover:bg-accent-soft active:scale-95 sm:px-6 sm:py-3 sm:text-sm">
+          hover:bg-accent-soft active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cream sm:px-6 sm:py-3 sm:text-sm">
           Read the devlog
         </a>
         <a href="{{ url_for('main.contact') }}" class="rounded-xl border border-line px-5 py-2.5 text-center text-xs
           font-medium text-cream transition-all duration-300
-          hover:border-accent hover:-translate-y-0.5 sm:px-6 sm:py-3 sm:text-sm">
+          hover:border-accent hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:px-6 sm:py-3 sm:text-sm">
           Get in touch
         </a>
       </div>
@@ -58,12 +58,13 @@
       {'n': '24/7', 'l': 'Learning'},
       {'n': '∞', 'l': 'Prototypes'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
+      <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
         hover:-translate-y-1
         hover:border-accent
         hover:shadow-xl">
-        <p class="font-display text-xl font-bold text-accent sm:text-3xl">{{ stat.n }}</p>
+        <p class="font-display text-xl font-bold text-accent sm:text-3xl"
+          {% if stat.n == '∞' %}aria-label="Infinite"{% endif %}>{{ stat.n }}</p>
         <p class="mt-1 text-xs text-muted sm:text-sm">{{ stat.l }}</p>
       </div>
       {% endfor %}
@@ -87,7 +88,7 @@
           celebrating small milestones, posting messy prototypes, and sharing real progress.
         </p>
         <a href="{{ url_for('main.about') }}"
-          class="mt-3 inline-block text-xs font-semibold text-accent hover:text-accent-soft sm:mt-4 sm:text-sm">
+          class="mt-3 inline-block rounded-md text-xs font-semibold text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:mt-4 sm:text-sm">
           Read my story →
         </a>
       </div>
@@ -110,7 +111,7 @@
         'd': 'Focusing on small tools and mechanics first, laying the groundwork before attempting massive scopes.'
         }
         ] %}
-        <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
+        <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
           transition-all duration-300
           hover:-translate-y-1
           hover:border-accent
@@ -130,12 +131,11 @@
       <p class="text-xs font-semibold uppercase tracking-wider text-accent">Current Status</p>
       <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">What's on the workbench</h2>
       <p class="mt-2 text-xs text-muted sm:text-sm">No public game releases yet, but here is what is currently being
-        researched and
-        built.</p>
+        researched and built.</p>
     </div>
 
     <div class="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-6">
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+      <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
         <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Prototype
           Phase</span>
         <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Core Game Loop Experiments</h3>
@@ -145,7 +145,7 @@
         </p>
       </div>
 
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+      <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
         <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Infrastructure</span>
         <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Flask Web Dashboard & Devlog
         </h3>
@@ -154,7 +154,7 @@
         </p>
       </div>
 
-      <div class="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+      <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
         <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Research</span>
         <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Engine & Tooling Exploration
         </h3>
@@ -185,7 +185,7 @@
       {'p': 'Future', 't': 'Public Release', 'd': 'Eventually shipping a small, finished indie title built completely
       from scratch.'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
+      <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
         hover:-translate-y-1
         hover:border-accent
@@ -208,27 +208,24 @@
         <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">From the devlog</h2>
       </div>
       <a href="{{ url_for('main.devlog') }}"
-        class="hidden text-sm font-semibold text-accent hover:text-accent-soft sm:block">
+        class="hidden rounded-md text-sm font-semibold text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:block">
         Read all posts →
       </a>
     </div>
     <div class="mt-6 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for post in posts %}
-      <article class="rounded-2xl border border-line bg-surface p-4 sm:p-6
-        transition-all duration-300
-        hover:-translate-y-1
-        hover:border-accent
-        hover:shadow-xl">
+      <a href="{{ url_for('main.devlog_post', post_id=post.id) }}"
+        class="reveal group block rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:p-6">
         <p class="text-[11px] text-muted sm:text-xs">{{ post.created_at.strftime('%b %d, %Y') }}</p>
-        <h3 class="mt-2 font-display text-base font-semibold text-cream sm:text-lg">{{ post.title }}</h3>
+        <h3 class="mt-2 font-display text-base font-semibold text-cream transition-colors group-hover:text-accent sm:text-lg">{{ post.title }}</h3>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
-          {{ post.body[:140] }}{% if post.body|length > 140 %}…{% endif %}
+          {{ post.body|striptags[:140] }}{% if post.body|striptags|length > 140 %}…{% endif %}
         </p>
-      </article>
+      </a>
       {% endfor %}
     </div>
     <a href="{{ url_for('main.devlog') }}"
-      class="mt-6 block text-center text-xs font-semibold text-accent hover:text-accent-soft sm:hidden">
+      class="mt-6 block rounded-md text-center text-xs font-semibold text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:hidden">
       Read all posts →
     </a>
   </div>
@@ -239,7 +236,7 @@
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-20">
     <p class="text-xs font-semibold uppercase tracking-wider text-accent">FAQ</p>
     <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Frequently Asked Questions</h2>
-    <div class="mt-6 grid gap-4 sm:mt-8 sm:gap-6 md:grid-cols-2">
+    <div class="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2">
       {% for faq in [
       {'q': 'Are there any games available to play right now?', 'a': 'Not yet! This site is currently tracking my solo
       dev journey from day one. Prototypes are in development, and updates will drop in the devlog.'},
@@ -250,14 +247,16 @@
       {'q': 'How can I follow the progress?', 'a': 'You can check out the devlog section regularly where I document code
       struggles, feature builds, and weekly progress.'}
       ] %}
-      <div class="rounded-2xl border border-line bg-surface p-4 sm:p-6
-        transition-all duration-300
-        hover:-translate-y-1
-        hover:border-accent
-        hover:shadow-xl">
-        <h3 class="font-display text-sm font-semibold text-cream sm:text-base">{{ faq.q }}</h3>
+      <details class="reveal group rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 open:border-accent sm:p-6">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-sm font-semibold text-cream sm:text-base">
+          {{ faq.q }}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            class="size-4 shrink-0 text-muted transition-transform duration-300 group-open:rotate-180 group-open:text-accent">
+            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+          </svg>
+        </summary>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">{{ faq.a }}</p>
-      </div>
+      </details>
       {% endfor %}
     </div>
   </div>
@@ -268,12 +267,33 @@
     <p class="text-xs font-medium uppercase tracking-wide text-muted sm:text-sm">Built With</p>
     <div
       class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 font-display text-sm font-bold text-muted sm:mt-8 sm:gap-x-10 sm:text-lg">
-      <span>Python</span>
-      <span>Flask</span>
-      <span>Tailwind CSS</span>
-      <span>PostgreSQL</span>
-      <span>Git</span>
+      <span class="transition-colors hover:text-accent">Python</span>
+      <span class="transition-colors hover:text-accent">Flask</span>
+      <span class="transition-colors hover:text-accent">Tailwind CSS</span>
+      <span class="transition-colors hover:text-accent">PostgreSQL</span>
+      <span class="transition-colors hover:text-accent">Git</span>
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+
+  const targets = document.querySelectorAll('.reveal');
+  targets.forEach(el => el.classList.add('opacity-0', 'translate-y-3', 'transition-all', 'duration-700'));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-3');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  targets.forEach(el => io.observe(el));
+})();
+</script>
 {% endblock %}
