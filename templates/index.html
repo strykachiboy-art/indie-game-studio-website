@@ -207,7 +207,7 @@
     </div>
     <div class="mt-6 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-3">
       {% for post in posts %}
-      <a href="{{ url_for('main.devlog_post', post_id=post.id) }}"
+      <a href="{{ url_for('main.devlog') }}#post-{{ post.id }}"
         class="reveal group block rounded-2xl border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:p-6">
         <p class="text-[11px] text-muted sm:text-xs">{{ post.created_at.strftime('%b %d, %Y') }}</p>
         <h3 class="mt-2 font-display text-base font-semibold text-cream transition-colors group-hover:text-accent sm:text-lg">{{ post.title }}</h3>
@@ -264,25 +264,4 @@
     </div>
   </div>
 </section>
-
-<script>
-(function () {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
-
-  const targets = document.querySelectorAll('.reveal');
-  targets.forEach(el => el.classList.add('opacity-0', 'translate-y-3', 'transition-all', 'duration-700'));
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-0', 'translate-y-3');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  targets.forEach(el => io.observe(el));
-})();
-</script>
 {% endblock %}

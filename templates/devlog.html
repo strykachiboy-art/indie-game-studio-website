@@ -33,15 +33,15 @@
       {# Safe fallbacks for attributes #}
       {% set title = post.title if post.title is defined else "Untitled" %}
       {% set body = post.body if post.body is defined else "" %}
-      {% set slug = post.slug if post.slug is defined else None %}
+      {% set post_identifier = post.id if post.id is defined else loop.index %}
       {% set created = post.created_at if post.created_at is defined else None %}
       <article
+        id="post-{{ post_identifier }}"
         class="rounded-2xl border border-line bg-surface p-4 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
         aria-labelledby="post-{{ loop.index }}-title">
-        <a href="{{ url_for('main.post', slug=slug) if slug else '#' }}" class="block focus:outline-none focus:ring-2 focus:ring-accent rounded-2xl">
+        <div class="block rounded-2xl">
           <p class="text-[11px] text-muted sm:text-xs">
             {% if created is not none %}
-              {# If created is a datetime object, render formatted and include machine-readable datetime #}
               {% if created.strftime is defined %}
                 <time datetime="{{ created.isoformat() }}">{{ created.strftime('%b %d, %Y') }}</time>
               {% else %}
@@ -57,9 +57,9 @@
           </h3>
 
           <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
-            {{ body[:200] }}{% if body|length > 200 %}…{% endif %}
+            {{ body|striptags|truncate(200, true, '…') }}
           </p>
-        </a>
+        </div>
       </article>
       {% endfor %}
     </div>
