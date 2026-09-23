@@ -53,10 +53,10 @@
 
     <div class="grid grid-cols-2 gap-3 sm:gap-4">
       {% for stat in [
-      {'n': '1', 'l': 'Solo Dev'},
-      {'n': '0', 'l': 'Released Games (Yet)'},
-      {'n': '24/7', 'l': 'Learning'},
-      {'n': '∞', 'l': 'Prototypes'}
+        {'n': '1', 'l': 'Solo Dev'},
+        {'n': '0', 'l': 'Released Games (Yet)'},
+        {'n': '24/7', 'l': 'Learning'},
+        {'n': '∞', 'l': 'Prototypes'}
       ] %}
       <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
@@ -94,22 +94,22 @@
       </div>
       <div class="grid gap-4 sm:gap-6 sm:grid-cols-2 md:col-span-2">
         {% for item in [
-        {
-        't': 'Built from Scratch',
-        'd': 'Writing my own backend logic, tracking databases, and experimenting with foundational game architecture.'
-        },
-        {
-        't': 'Radical Transparency',
-        'd': 'No vaporware or overhyped trailers. What you see is the actual state of development.'
-        },
-        {
-        't': 'Learning in Public',
-        'd': 'Bugs, failed experiments, and breakthrough moments are all documented openly in the devlog.'
-        },
-        {
-        't': 'Step by Step',
-        'd': 'Focusing on small tools and mechanics first, laying the groundwork before attempting massive scopes.'
-        }
+          {
+            't': 'Built from Scratch',
+            'd': 'Writing my own backend logic, tracking databases, and experimenting with foundational game architecture.'
+          },
+          {
+            't': 'Radical Transparency',
+            'd': 'No vaporware or overhyped trailers. What you see is the actual state of development.'
+          },
+          {
+            't': 'Learning in Public',
+            'd': 'Bugs, failed experiments, and breakthrough moments are all documented openly in the devlog.'
+          },
+          {
+            't': 'Step by Step',
+            'd': 'Focusing on small tools and mechanics first, laying the groundwork before attempting massive scopes.'
+          }
         ] %}
         <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
           transition-all duration-300
@@ -136,8 +136,7 @@
 
     <div class="mt-6 grid gap-4 sm:mt-8 sm:grid-cols-3 sm:gap-6">
       <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
-        <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Prototype
-          Phase</span>
+        <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-accent sm:text-xs">Prototype Phase</span>
         <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Core Game Loop Experiments</h3>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Testing simple mechanics, player input handling, and state management in code environments before committing
@@ -147,8 +146,7 @@
 
       <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
         <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Infrastructure</span>
-        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Flask Web Dashboard & Devlog
-        </h3>
+        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Flask Web Dashboard & Devlog</h3>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Building and polishing this exact website to track progress, write markdown logs, and manage updates cleanly.
         </p>
@@ -156,8 +154,7 @@
 
       <div class="reveal rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl sm:p-6">
         <span class="rounded-md bg-ink px-2.5 py-1 text-[11px] font-medium text-muted sm:text-xs">Research</span>
-        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Engine & Tooling Exploration
-        </h3>
+        <h3 class="mt-3 font-display text-base font-bold text-cream sm:mt-4 sm:text-lg">Engine & Tooling Exploration</h3>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
           Evaluating lightweight tools, graphic libraries, and performance frameworks for future game concepts.
         </p>
@@ -176,14 +173,10 @@
     </p>
     <div class="mt-6 grid gap-4 sm:mt-10 sm:gap-6 md:grid-cols-4">
       {% for milestone in [
-      {'p': '2026', 't': 'Website Launch', 'd': 'Built and deployed this Flask dashboard to document the learning
-      process from day one.'},
-      {'p': 'In Progress', 't': 'Core Prototypes', 'd': 'Experimenting with code logic, UI structuring, and basic
-      interactive browser tools.'},
-      {'p': 'Next', 't': 'First Playable Slice', 'd': 'Aiming to build a minimal, functional playable vertical slice of
-      a game concept.'},
-      {'p': 'Future', 't': 'Public Release', 'd': 'Eventually shipping a small, finished indie title built completely
-      from scratch.'}
+        {'p': '2026', 't': 'Website Launch', 'd': 'Built and deployed this Flask dashboard to document the learning process from day one.'},
+        {'p': 'In Progress', 't': 'Core Prototypes', 'd': 'Experimenting with code logic, UI structuring, and basic interactive browser tools.'},
+        {'p': 'Next', 't': 'First Playable Slice', 'd': 'Aiming to build a minimal, functional playable vertical slice of a game concept.'},
+        {'p': 'Future', 't': 'Public Release', 'd': 'Eventually shipping a small, finished indie title built completely from scratch.'}
       ] %}
       <div class="reveal rounded-2xl border border-line bg-surface p-4 sm:p-6
         transition-all duration-300
@@ -219,7 +212,7 @@
         <p class="text-[11px] text-muted sm:text-xs">{{ post.created_at.strftime('%b %d, %Y') }}</p>
         <h3 class="mt-2 font-display text-base font-semibold text-cream transition-colors group-hover:text-accent sm:text-lg">{{ post.title }}</h3>
         <p class="mt-2 text-xs leading-relaxed text-muted sm:text-sm">
-          {{ post.body|striptags[:140] }}{% if post.body|striptags|length > 140 %}…{% endif %}
+          {{ post.body|striptags|truncate(140, true, '…') }}
         </p>
       </a>
       {% endfor %}
@@ -238,14 +231,10 @@
     <h2 class="mt-2 font-display text-xl font-bold sm:text-3xl">Frequently Asked Questions</h2>
     <div class="mt-6 grid gap-3 sm:mt-8 sm:gap-4 md:grid-cols-2">
       {% for faq in [
-      {'q': 'Are there any games available to play right now?', 'a': 'Not yet! This site is currently tracking my solo
-      dev journey from day one. Prototypes are in development, and updates will drop in the devlog.'},
-      {'q': 'Is StrykaMax a studio or just you?', 'a': 'It is just me (one solo developer) handling everything from
-      backend coding to UI layout.'},
-      {'q': 'What tech stack powers this website?', 'a': 'It runs on Python and Flask with SQLAlchemy, styled with
-      Tailwind CSS, and managed through an admin dashboard.'},
-      {'q': 'How can I follow the progress?', 'a': 'You can check out the devlog section regularly where I document code
-      struggles, feature builds, and weekly progress.'}
+        {'q': 'Are there any games available to play right now?', 'a': 'Not yet! This site is currently tracking my solo dev journey from day one. Prototypes are in development, and updates will drop in the devlog.'},
+        {'q': 'Is StrykaMax a studio or just you?', 'a': 'It is just me (one solo developer) handling everything from backend coding to UI layout.'},
+        {'q': 'What tech stack powers this website?', 'a': 'It runs on Python and Flask with SQLAlchemy, styled with Tailwind CSS, and managed through an admin dashboard.'},
+        {'q': 'How can I follow the progress?', 'a': 'You can check out the devlog section regularly where I document code struggles, feature builds, and weekly progress.'}
       ] %}
       <details class="reveal group rounded-2xl border border-line bg-surface p-4 transition-colors duration-300 open:border-accent sm:p-6">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-sm font-semibold text-cream sm:text-base">
