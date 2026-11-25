@@ -22,12 +22,14 @@
       </div>
       <div class="flex shrink-0 items-center gap-2">
         <form method="POST" action="{{ url_for('admin.toggle_read', message_id=m.id) }}">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <button class="rounded-md border border-line px-3 py-1 text-xs text-cream hover:border-accent">
             {{ 'Mark unread' if m.is_read else 'Mark read' }}
           </button>
         </form>
         <form method="POST" action="{{ url_for('admin.delete_message', message_id=m.id) }}"
           onsubmit="return confirm('Delete this message?');">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <button class="rounded-md border border-red-500/40 px-3 py-1 text-xs text-red-300 hover:bg-red-500/10">
             Delete
           </button>

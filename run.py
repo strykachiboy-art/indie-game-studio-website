@@ -1,7 +1,6 @@
 import os
 import sys
 
-# Tell Python to include the 'studio_site' directory in imports
 sys.path.insert(0, os.path.dirname(__file__))
 
 from app import create_app
@@ -9,64 +8,5 @@ from app import create_app
 app = create_app()
 
 if __name__ == "__main__":
-    debug = os.environ.get("FLASK_DEBUG", "1") == "1"
-    app.run(host="0.0.0.0", port=5000, debug=debug)
-    
-
-# PS C:\Users\HP\Downloads\indie-game-studio-website\studio_site> .venv\Scripts\Activate.ps1
-# (.venv) PS C:\Users\HP\Downloads\indie-game-studio-website\studio_site> flask --app run.py shell
-# Ctrl click to launch VS Code Native REPL
-# Python 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)] on win32
-# App: app
-# Instance: C:\Users\HP\Downloads\indie-game-studio-website\studio_site\instance
-# >>> from app.extensions import db
-# >>> from app.models import User
-# >>> u = User.query.filter_by(username="StrykaMax").first()
-# >>> print(u)
-# <User StrykaMax>
-# >>> u.set_password("StrykaMaximum63")
-# >>> db.session.commit()
-# >>> exit()
-# (.venv) PS C:\Users\HP\Downloads\indie-game-studio-website\studio_site>
-
-
-# cd "c:\Users\HP\Documents\Flask\My_project"
-# python run.py
-
-# cd "c:\Users\HP\Documents\Flask\My_project"
-# pytest -q
-
-# Generate secret key:
-#     python -c "import secrets; print(secrets.token_hex(32))"
-
-# cd "c:\Users\HP\Documents\Flask\My_project"
-# C:\Users\HP\AppData\Local\Programs\Python\Python312\python.exe run.py
-
-# cd "c:\Users\HP\Documents\Flask\My_project"
-# C:\Users\HP\AppData\Local\Programs\Python\Python312\python.exe -m pytest -q
-
-
-# Microsoft Windows [Version 10.0.19045.6466]
-# (c) Microsoft Corporation. All rights reserved.
-
-# C:\Users\HP>psql -U postgres
-# 'psql' is not recognized as an internal or external command,
-# operable program or batch file.
-
-# C:\Users\HP>cd C:\Program Files\PostgreSQL\18\bin
-
-# C:\Program Files\PostgreSQL\18\bin>psql -U postgres
-# psql (18.3)
-# WARNING: Console code page (437) differs from Windows code page (1252)
-#          8-bit characters might not work correctly. See psql reference
-#          page "Notes for Windows users" for details.
-# Type "help" for help.
-
-# postgres=# 
-
-# npx @tailwindcss/cli -i ./src/input.css -o ./static/css/output.css --minify
-
-# & "C:\msys64\mingw64\bin\git.exe" add .
-# & "C:\msys64\mingw64\bin\git.exe" commit -m "update tailwind styles"
-# & "C:\msys64\mingw64\bin\git.exe" push
-
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
+    app.run(host="127.0.0.1", port=5000, debug=debug)

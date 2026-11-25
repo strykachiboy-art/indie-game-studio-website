@@ -48,7 +48,7 @@ def login():
             login_user(user, remember=form.remember.data)
             flash("Logged in successfully.", "success")
             next_page = request.args.get("next")
-            if next_page and next_page.startswith("/"):
+            if next_page and next_page.startswith("/") and not next_page.startswith("//") and "\\" not in next_page:
                 return redirect(next_page)
             if user.is_admin:
                 return redirect(url_for("admin.dashboard"))

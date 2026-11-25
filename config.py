@@ -8,12 +8,22 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
+    _is_prod = (
+        os.environ.get("VERCEL") == "1"
+        or os.environ.get("FLASK_ENV") == "production"
+        or os.environ.get("ENV") == "production"
+    )
+
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    if not SECRET_KEY:
+        if _is_prod:
+            raise RuntimeError("SECRET_KEY is not set.")
+        SECRET_KEY = "dev-secret-change-me"
 
     _raw_url = os.environ.get("DATABASE_URL")
 
     if not _raw_url:
-        if os.environ.get("FLASK_ENV") == "production" or os.environ.get("ENV") == "production":
+        if _is_prod:
             raise RuntimeError("DATABASE_URL is not set.")
         _raw_url = "postgresql://postgres:postgres@localhost:5432/gamestudio"
 

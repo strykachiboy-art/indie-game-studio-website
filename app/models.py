@@ -1,9 +1,14 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from .extensions import db, login_manager
+
+
+def utcnow() -> datetime:
+    """Naive UTC now (matches the existing DateTime columns, no deprecation warning)."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 @login_manager.user_loader
@@ -18,7 +23,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)  # index=True removed — redundant
     password_hash = db.Column(db.String(255), nullable=False)
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=utcnow, nullable=False)
 
     posts = db.relationship(
         "Post", backref="author", lazy=True,
@@ -50,7 +55,7 @@ class Post(db.Model):
     slug = db.Column(db.String(220), unique=True, nullable=False)
     body = db.Column(db.Text, nullable=False)
     published = db.Column(db.Boolean, default=True, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=utcnow, nullable=False)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey("users.id", ondelete="CASCADE"),
@@ -69,7 +74,7 @@ class Message(db.Model):
     email = db.Column(db.String(255), nullable=False)
     body = db.Column(db.Text, nullable=False)
     is_read = db.Column(db.Boolean, default=False, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=utcnow, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
     def __repr__(self) -> str:
         return f"<Message from {self.name}>"

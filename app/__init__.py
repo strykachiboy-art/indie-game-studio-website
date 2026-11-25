@@ -4,7 +4,8 @@ import click
 from flask import Flask, render_template
 from datetime import datetime
 from config import Config
-from .extensions import db, login_manager, migrate
+from .extensions import csrf, db, login_manager, migrate
+from .models import utcnow
 
 
 def create_app(config_class=Config):
@@ -17,6 +18,7 @@ def create_app(config_class=Config):
 
     # Initialize extensions
     db.init_app(app)
+    csrf.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
 
@@ -40,6 +42,18 @@ def create_app(config_class=Config):
 
     register_cli(app)
 
+    @app.template_filter("timesince")
+    def timesince(dt):
+        """Human-friendly 'x ago' for a naive UTC datetime."""
+        if not dt:
+            return ""
+        seconds = int((utcnow() - dt).total_seconds())
+        if seconds < 60:
+            return "just now"
+        for unit, size in (("d", 86400), ("h", 3600), ("m", 60)):
+            if seconds >= size:
+                return f"{seconds // size}{unit} ago"
+
     @app.context_processor
     def inject_current_year():
         return {'current_year': datetime.now().year}
@@ -61,9 +75,12 @@ def register_cli(app):
         """Create tables and an initial admin user from environment vars."""
         db.create_all()
 
-        email = os.environ.get("ADMIN_EMAIL", "strykamax@gmail.com")
-        username = os.environ.get("ADMIN_USERNAME", "StrykaMax")
-        password = os.environ.get("ADMIN_PASSWORD", "StrykaMaximum63")
+        email = os.environ.get("ADMIN_EMAIL")
+        username = os.environ.get("ADMIN_USERNAME", "admin")
+        password = os.environ.get("ADMIN_PASSWORD")
+
+        if not email or not password:
+            raise click.ClickException("Set ADMIN_EMAIL and ADMIN_PASSWORD first.")
 
         if User.query.filter_by(email=email).first():
             click.echo(f"Admin '{email}' already exists.")
@@ -73,7 +90,4 @@ def register_cli(app):
         admin.set_password(password)
         db.session.add(admin)
         db.session.commit()
-        click.echo(f"Created admin user: {email} / {password}")
-        
-        
-        
+        click.echo(f"Created admin user: {email}")
