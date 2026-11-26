@@ -1,4 +1,5 @@
-from flask import Blueprint, flash, redirect, render_template, url_for
+from flask import Blueprint, abort, flash, redirect, render_template, url_for
+from flask_login import current_user
 
 from ..extensions import db
 from ..forms import ContactForm
@@ -60,6 +61,19 @@ def games():
 def devlog():
     posts = Post.query.filter_by(published=True).order_by(Post.created_at.desc()).all()
     return render_template("devlog.html", posts=posts)
+
+
+@main_bp.route("/devlog/<slug>")
+def post_detail(slug):
+    post = Post.query.filter_by(slug=slug).first_or_404()
+    is_admin = current_user.is_authenticated and current_user.is_admin
+    if not post.published and not is_admin:
+        abort(404)
+
+    published = Post.query.filter(Post.published.is_(True))
+    newer = published.filter(Post.created_at > post.created_at).order_by(Post.created_at.asc()).first()
+    older = published.filter(Post.created_at < post.created_at).order_by(Post.created_at.desc()).first()
+    return render_template("post.html", post=post, newer=newer, older=older)
 
 
 @main_bp.route("/contact", methods=["GET", "POST"])

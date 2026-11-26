@@ -1,0 +1,13 @@
+{# Usage: {% from "partials/_avatar.html" import avatar %}  {{ avatar(user, 'h-8 w-8', 'text-xs') }} #}
+{% macro avatar(user, size="h-8 w-8", text="text-xs") -%}
+{% if user and user.avatar_url -%}
+<img src="{{ user.avatar_url }}" alt="" width="256" height="256" loading="lazy"
+  class="{{ size }} shrink-0 rounded-full border border-line bg-surface object-cover">
+{%- else -%}
+<span aria-hidden="true"
+  class="{{ size }} {{ text }} flex shrink-0 items-center justify-center rounded-full border font-semibold
+    {% if user and user.is_admin %}border-accent/30 bg-accent/20 text-accent{% else %}border-line bg-surface text-cream{% endif %}">
+  {{ (user.username if user else "?")[0]|upper }}
+</span>
+{%- endif %}
+{%- endmacro %}

@@ -1,7 +1,8 @@
 import os
 
 import click
-from flask import Flask, render_template
+from flask import Flask, flash, redirect, render_template, url_for
+from flask_login import current_user
 from datetime import datetime
 from config import Config
 from .extensions import csrf, db, login_manager, migrate
@@ -26,9 +27,13 @@ def create_app(config_class=Config):
     from .blueprints.main import main_bp
     from .blueprints.auth import auth_bp
     from .blueprints.admin import admin_bp
+    from .blueprints.profile import profile_bp
+    from .filters import register_filters
 
+    register_filters(app)
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(profile_bp)
     app.register_blueprint(admin_bp, url_prefix="/admin")
 
     # Error handlers
@@ -39,6 +44,20 @@ def create_app(config_class=Config):
     @app.errorhandler(404)
     def not_found(_):
         return render_template("errors/404.html"), 404
+
+    @app.errorhandler(413)
+    def too_large(_):
+        flash("That upload is too large (max 2 MB).", "error")
+        if current_user.is_authenticated:
+            return redirect(url_for("profile.view"))
+        return redirect(url_for("main.index"))
+
+    @app.after_request
+    def security_headers(resp):
+        resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+        resp.headers.setdefault("X-Frame-Options", "DENY")
+        resp.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        return resp
 
     register_cli(app)
 

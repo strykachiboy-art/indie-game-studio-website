@@ -14,7 +14,7 @@
     {% for e in form.title.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}
   </div>
   <div>
-    <label for="body" class="mb-1 block text-sm text-muted">Body</label>
+    <label for="body" class="mb-1 block text-sm text-muted">Body <span class="text-xs">— Markdown supported (**bold**, `code`, # headings, lists, links)</span></label>
     {{ form.body(id="body", rows="10", class="w-full resize-y rounded-lg border border-line bg-ink px-4 py-3 text-cream
     placeholder-muted focus:border-accent focus:outline-none min-h-[220px] sm:min-h-[360px]", placeholder="Write your post…") }}
     {% for e in form.body.errors %}<p class="mt-1 text-xs text-red-300">{{ e }}</p>{% endfor %}

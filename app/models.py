@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 
+from flask import url_for
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -24,6 +25,11 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime, default=utcnow, nullable=False)
+    bio = db.Column(db.String(280), nullable=True)
+    # Deferred: the image bytes are only loaded when /avatar/<id> is served,
+    # not on every request that loads current_user.
+    avatar_data = db.deferred(db.Column(db.LargeBinary, nullable=True))
+    avatar_version = db.Column(db.Integer, default=0, nullable=False, server_default="0")
 
     posts = db.relationship(
         "Post", backref="author", lazy=True,
@@ -36,6 +42,16 @@ class User(UserMixin, db.Model):
         cascade="all, delete-orphan",
         passive_deletes=True,          # let the DB handle the delete, not the ORM
     )
+
+    @property
+    def has_avatar(self) -> bool:
+        return (self.avatar_version or 0) > 0
+
+    @property
+    def avatar_url(self):
+        if not self.has_avatar:
+            return None
+        return url_for("profile.avatar", user_id=self.id, v=self.avatar_version)
 
     def set_password(self, password: str) -> None:
         self.password_hash = generate_password_hash(password)

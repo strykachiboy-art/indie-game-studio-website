@@ -1,3 +1,4 @@
+{% from "partials/_avatar.html" import avatar %}
 <header class="sticky top-0 z-50 border-b border-line bg-ink/80 backdrop-blur-md">
   <a href="#main-content"
     class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink">
@@ -48,15 +49,13 @@
         <a href="{{ url_for('admin.dashboard') }}"
           class="rounded-md px-3 py-2 text-sm font-medium text-accent hover:text-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
         {% endif %}
-        <div class="flex items-center gap-2 border-l border-line pl-3">
-          <span class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold
-            {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
-            {{ current_user.username[0]|upper }}
-          </span>
-          <span class="text-sm text-muted">{{ current_user.username }}</span>
-        </div>
-        <a href="{{ url_for('auth.logout') }}"
-          class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log out</a>
+        <a href="{{ url_for('profile.view') }}" aria-label="Your profile"
+          {% if request.endpoint == 'profile.view' %}aria-current="page"{% endif %}
+          class="group flex items-center gap-2 rounded-md border-l border-line pl-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+          {{ avatar(current_user, 'h-8 w-8', 'text-xs') }}
+          <span class="text-sm text-muted transition-colors group-hover:text-cream">{{ current_user.username }}</span>
+        </a>
+        <form method="POST" action="{{ url_for('auth.logout') }}" class="contents"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit" class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer">Log out</button></form>
       {% else %}
         <a href="{{ url_for('auth.login') }}"
           class="rounded-md px-3 py-2 text-sm font-medium text-muted hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
@@ -73,11 +72,11 @@
       <span class="sr-only">Menu</span>
       <div class="relative h-4 w-5">
         <span
-          class="bar absolute left-0 top-0 h-0.5 w-5 rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
+          class="bar absolute left-0 top-0 h-0.5 w-5 rounded-full bg-cream transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
         <span
-          class="bar absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded-full bg-white transition-all duration-200 ease-in"></span>
+          class="bar absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 rounded-full bg-cream transition-all duration-200 ease-in"></span>
         <span
-          class="bar absolute left-0 bottom-0 h-0.5 w-5 rounded-full bg-white transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
+          class="bar absolute left-0 bottom-0 h-0.5 w-5 rounded-full bg-cream transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]"></span>
       </div>
     </button>
   </nav>
@@ -108,19 +107,19 @@
 
     <div class="flex flex-col gap-2">
       {% if current_user.is_authenticated %}
-        <div class="drawer-link mb-2 flex items-center gap-3 px-3 opacity-0">
-          <span class="flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold
-            {% if current_user.is_admin %}bg-accent/20 text-accent{% else %}bg-surface text-cream{% endif %}">
-            {{ current_user.username[0]|upper }}
+        <a href="{{ url_for('profile.view') }}"
+          class="drawer-link mb-2 flex items-center gap-3 rounded-md px-3 py-2 opacity-0 transition-all hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+          {{ avatar(current_user, 'h-10 w-10', 'text-sm') }}
+          <span class="min-w-0">
+            <span class="block truncate text-sm font-medium text-cream">{{ current_user.username }}</span>
+            <span class="block text-xs text-muted">View profile</span>
           </span>
-          <span class="text-sm text-cream">{{ current_user.username }}</span>
-        </div>
+        </a>
         {% if current_user.is_admin %}
         <a href="{{ url_for('admin.dashboard') }}"
           class="drawer-link rounded-md px-3 py-3 text-base font-medium text-accent opacity-0 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Dashboard</a>
         {% endif %}
-        <a href="{{ url_for('auth.logout') }}"
-          class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-cream opacity-0 transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log out</a>
+        <form method="POST" action="{{ url_for('auth.logout') }}" class="contents"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit" class="drawer-link mt-2 inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-cream opacity-0 transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer">Log out</button></form>
       {% else %}
         <a href="{{ url_for('auth.login') }}"
           class="drawer-link rounded-md px-3 py-3 text-base font-medium text-muted opacity-0 hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>

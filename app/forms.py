@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField, FileRequired
 from wtforms import (
     BooleanField,
     PasswordField,
@@ -11,6 +12,7 @@ from wtforms.validators import (
     Email,
     EqualTo,
     Length,
+    Optional,
     ValidationError,
 )
 
@@ -45,3 +47,35 @@ class PostForm(FlaskForm):
     body = TextAreaField("Body", validators=[DataRequired()])
     published = BooleanField("Published", default=True)
     submit = SubmitField("Save post")
+
+
+
+class ProfileForm(FlaskForm):
+    bio = TextAreaField("Bio", validators=[Optional(), Length(max=280)])
+    submit = SubmitField("Save profile")
+
+
+class AvatarForm(FlaskForm):
+    avatar = FileField(
+        "Profile picture",
+        validators=[
+            FileRequired(message="Choose an image first."),
+            FileAllowed(["jpg", "jpeg", "png", "webp"], "Use a JPG, PNG or WebP image."),
+        ],
+    )
+    submit = SubmitField("Upload")
+
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField("Current password", validators=[DataRequired()])
+    new_password = PasswordField("New password", validators=[DataRequired(), Length(min=8)])
+    confirm = PasswordField(
+        "Confirm new password",
+        validators=[DataRequired(), EqualTo("new_password", message="Passwords must match.")],
+    )
+    submit = SubmitField("Change password")
+
+
+class DeleteAccountForm(FlaskForm):
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Delete my account")

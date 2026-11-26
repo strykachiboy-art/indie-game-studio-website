@@ -30,6 +30,8 @@ class Config:
     if _raw_url.startswith("postgres://"):
         _raw_url = _raw_url.replace("postgres://", "postgresql://", 1)
 
+    MAX_CONTENT_LENGTH = 3 * 1024 * 1024
+
     SQLALCHEMY_DATABASE_URI = _raw_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {

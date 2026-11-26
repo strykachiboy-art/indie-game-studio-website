@@ -83,6 +83,12 @@ document.addEventListener("DOMContentLoaded", function () {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.remove("opacity-0", "translate-y-3");
+            // Drop the slow fade-in duration afterwards so hover effects stay snappy.
+            entry.target.addEventListener(
+              "transitionend",
+              () => entry.target.classList.remove("duration-700"),
+              { once: true }
+            );
             io.unobserve(entry.target);
           }
         });
@@ -91,4 +97,41 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     revealTargets.forEach((el) => io.observe(el));
   }
+  /* ---------- Profile: avatar preview + bio counter ---------- */
+  const MAX_AVATAR_BYTES = 2 * 1024 * 1024;
+  const avatarInput = document.querySelector("[data-avatar-input]");
+  if (avatarInput) {
+    const preview = document.querySelector("[data-avatar-preview]");
+    const current = document.querySelector("[data-avatar-current]");
+    const hint = document.querySelector("[data-avatar-hint]");
+    let objectUrl = null;
+
+    avatarInput.addEventListener("change", () => {
+      const file = avatarInput.files && avatarInput.files[0];
+      if (!file) return;
+      if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
+        avatarInput.value = "";
+        if (hint) hint.textContent = "Use a JPG, PNG or WebP image.";
+        return;
+      }
+      if (file.size > MAX_AVATAR_BYTES) {
+        avatarInput.value = "";
+        if (hint) hint.textContent = "That image is over 2 MB.";
+        return;
+      }
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = URL.createObjectURL(file);
+      if (preview) { preview.src = objectUrl; preview.classList.remove("hidden"); }
+      if (current) current.classList.add("hidden");
+      if (hint) hint.textContent = file.name;
+    });
+  }
+
+  document.querySelectorAll("[data-counter]").forEach((field) => {
+    const out = document.getElementById(field.dataset.counter);
+    if (!out) return;
+    const update = () => { out.textContent = field.value.length; };
+    field.addEventListener("input", update);
+    update();
+  });
 });

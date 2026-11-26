@@ -1,7 +1,18 @@
-/* Small enhancements on top of Tailwind (loaded via CDN in base.html). */
+/* Small enhancements on top of the compiled Tailwind build (static/css/output.css). */
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: #a3e63540;
+  color: #f4f4f0;
 }
 
 /* Nicer scrollbar on the dark theme */
@@ -19,3 +30,68 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #65a30d;
 }
+
+/* Faint blueprint grid behind the hero, fading out toward the edges */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 244, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 244, 240, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+/* Rendered markdown (devlog posts) */
+.prose-dev {
+  color: #d7d7d2;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.prose-dev > * + * { margin-top: 1.25em; }
+.prose-dev h1, .prose-dev h2, .prose-dev h3, .prose-dev h4 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: #f4f4f0;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 2em;
+}
+.prose-dev h1 { font-size: 1.9rem; }
+.prose-dev h2 { font-size: 1.55rem; }
+.prose-dev h3 { font-size: 1.25rem; }
+.prose-dev h4 { font-size: 1.1rem; }
+.prose-dev a { color: #a3e635; text-decoration: underline; text-underline-offset: 3px; }
+.prose-dev a:hover { color: #65a30d; }
+.prose-dev strong { color: #f4f4f0; font-weight: 600; }
+.prose-dev ul, .prose-dev ol { padding-left: 1.4em; }
+.prose-dev ul { list-style: disc; }
+.prose-dev ol { list-style: decimal; }
+.prose-dev li + li { margin-top: 0.4em; }
+.prose-dev li::marker { color: #65a30d; }
+.prose-dev blockquote {
+  border-left: 3px solid #a3e635;
+  padding-left: 1em;
+  color: #9ca3af;
+  font-style: italic;
+}
+.prose-dev code {
+  background: #13151d;
+  border: 1px solid #252838;
+  border-radius: 0.375rem;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+.prose-dev pre {
+  background: #13151d;
+  border: 1px solid #252838;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+.prose-dev pre code { background: none; border: 0; padding: 0; font-size: 0.875rem; }
+.prose-dev img { max-width: 100%; height: auto; border-radius: 0.75rem; }
+.prose-dev hr { border: 0; border-top: 1px solid #252838; margin: 2em 0; }
+.prose-dev table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
+.prose-dev th, .prose-dev td { border: 1px solid #252838; padding: 0.5rem 0.75rem; text-align: left; }
+.prose-dev th { background: #13151d; color: #f4f4f0; }
