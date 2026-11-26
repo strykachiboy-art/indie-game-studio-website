@@ -10,3 +10,4 @@ python-dotenv==1.0.1
 Pillow==10.4.0
 markdown==3.7
 nh3==0.2.18
+psycopg[binary]==3.2.3
