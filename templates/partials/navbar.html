@@ -28,7 +28,7 @@
     ] %}
 
     <!-- Desktop links -->
-    <div class="hidden items-center gap-1 md:flex">
+    <div class="hidden items-center gap-1 lg:flex">
       {% for endpoint, label in links %}
       <a href="{{ url_for(endpoint) }}"
         {% if request.endpoint == endpoint %}aria-current="page"{% endif %}
@@ -43,7 +43,7 @@
     </div>
 
     <!-- Desktop auth -->
-    <div class="hidden items-center gap-3 md:flex">
+    <div class="hidden items-center gap-3 lg:flex">
       {% if current_user.is_authenticated %}
         {% if current_user.is_admin %}
         <a href="{{ url_for('admin.dashboard') }}"
@@ -53,9 +53,9 @@
           {% if request.endpoint == 'profile.view' %}aria-current="page"{% endif %}
           class="group flex items-center gap-2 rounded-md border-l border-line pl-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
           {{ avatar(current_user, 'h-8 w-8', 'text-xs') }}
-          <span class="text-sm text-muted transition-colors group-hover:text-cream">{{ current_user.username }}</span>
+          <span class="max-w-[9rem] truncate text-sm text-muted transition-colors group-hover:text-cream">{{ current_user.username }}</span>
         </a>
-        <form method="POST" action="{{ url_for('auth.logout') }}" class="contents"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit" class="inline-flex items-center justify-center rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer">Log out</button></form>
+        <form method="POST" action="{{ url_for('auth.logout') }}" class="contents"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button type="submit" class="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg border border-line bg-surface px-4 py-2 text-sm font-medium text-cream transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer">Log out</button></form>
       {% else %}
         <a href="{{ url_for('auth.login') }}"
           class="rounded-md px-3 py-2 text-sm font-medium text-muted hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">Log in</a>
@@ -67,7 +67,7 @@
     <!-- Hamburger -->
     <button id="nav-toggle"
       type="button"
-      class="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent md:hidden"
+      class="relative z-[60] flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-surface transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:hidden"
       aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-drawer">
       <span class="sr-only">Menu</span>
       <div class="relative h-4 w-5">
@@ -84,12 +84,12 @@
 
 <!-- Backdrop -->
 <div id="nav-backdrop"
-  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 md:hidden">
+  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 lg:hidden">
 </div>
 
 <!-- Slide-in drawer -->
 <div id="nav-drawer"
-  class="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] translate-x-full border-l border-line bg-ink shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] md:hidden"
+  class="fixed right-0 top-0 z-50 h-full w-72 max-w-[85vw] translate-x-full border-l border-line bg-ink shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] lg:hidden"
   aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
   <div class="flex h-full flex-col px-6 pb-8 pt-24">
     <div class="flex flex-col gap-1">

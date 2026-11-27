@@ -261,3 +261,27 @@ def test_profile_migration_runs_on_old_schema(tmp_path):
     with engine.connect() as conn:
         row = conn.execute(sa.text("SELECT username, avatar_version FROM users")).one()
     assert tuple(row) == ("old", 0)
+
+
+# ---------- layout regressions ----------
+
+def test_excerpt_skips_code_blocks():
+    from app.filters import excerpt
+    text = "Intro sentence here.\n\n```rust\nfn main() { println!(\"hi\"); }\n```\n\nOutro."
+    out = excerpt(text, 200)
+    assert "fn main" not in out and "Intro sentence here." in out and "Outro." in out
+
+
+def test_navbar_switches_to_hamburger_at_lg_not_md(client):
+    """The logged-in desktop nav is too wide for 768px, so it must only show from lg up."""
+    html = client.get("/").get_data(as_text=True)
+    assert "lg:flex" in html and "lg:hidden" in html
+    assert "md:flex" not in html and "md:hidden" not in html
+
+
+def test_admin_users_list_shows_uploaded_avatar(client, app):
+    admin = _make_user("boss", admin=True)
+    _login(client, "boss")
+    _upload(client, _png())
+    html = client.get("/admin/users").get_data(as_text=True)
+    assert f"/avatar/{admin.id}?v=1" in html

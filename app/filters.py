@@ -20,7 +20,8 @@ def render_markdown(text: str) -> Markup:
 
 def excerpt(text: str, length: int = 140) -> str:
     """Markdown -> plain text, cut at a word boundary."""
-    plain = html.unescape(nh3.clean(_to_html(text), tags=set()))
+    rendered = re.sub(r"<pre>.*?</pre>", " ", _to_html(text), flags=re.S)
+    plain = html.unescape(nh3.clean(rendered, tags=set()))
     plain = re.sub(r"\s+", " ", plain).strip()
     if len(plain) <= length:
         return plain

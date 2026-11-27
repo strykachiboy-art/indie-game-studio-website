@@ -18,14 +18,14 @@
       <div class="rounded-full ring-2 ring-accent/40 ring-offset-4 ring-offset-surface">
         {{ avatar(current_user, 'h-24 w-24 sm:h-28 sm:w-28', 'text-4xl') }}
       </div>
-      <div class="min-w-0">
+      <div class="min-w-0 max-w-full">
         <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-          <h2 class="truncate font-display text-2xl font-bold">{{ current_user.username }}</h2>
+          <h2 class="font-display text-2xl font-bold [overflow-wrap:anywhere]">{{ current_user.username }}</h2>
           {% if current_user.is_admin %}
           <span class="rounded-md bg-accent/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">Admin</span>
           {% endif %}
         </div>
-        <p class="mt-1 truncate text-sm text-muted">{{ current_user.email }}</p>
+        <p class="mt-1 text-sm text-muted [overflow-wrap:anywhere]">{{ current_user.email }}</p>
         {% if current_user.bio %}
         <p class="mt-3 max-w-xl text-sm leading-relaxed text-cream/90">{{ current_user.bio }}</p>
         {% endif %}

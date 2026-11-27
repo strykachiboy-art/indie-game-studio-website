@@ -1,4 +1,5 @@
 {% extends "admin/base_admin.html" %}
+{% from "partials/_avatar.html" import avatar %}
 {% block title %}Admin — Users{% endblock %}
 
 {% block admin_content %}
@@ -12,10 +13,7 @@
   <div class="border-line p-4 transition-colors {% if not loop.first %}border-t{% endif %}">
     <div class="flex items-start justify-between gap-3">
       <div class="flex min-w-0 items-center gap-3">
-        <div class="flex size-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold
-          {% if user.is_admin %}bg-accent/20 text-accent{% else %}bg-ink text-muted{% endif %}">
-          {{ user.username[0]|upper }}
-        </div>
+        {{ avatar(user, 'size-9', 'text-sm') }}
         <div class="min-w-0">
           <p class="truncate font-medium text-cream">{{ user.username }}</p>
           <p class="truncate text-sm text-muted">{{ user.email }}</p>
@@ -74,10 +72,7 @@
       <tr class="group transition-colors hover:bg-ink/40">
         <td class="px-4 py-3">
           <div class="flex items-center gap-3">
-            <div class="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold
-              {% if user.is_admin %}bg-accent/20 text-accent{% else %}bg-ink text-muted{% endif %}">
-              {{ user.username[0]|upper }}
-            </div>
+            {{ avatar(user, 'size-8', 'text-xs') }}
             <span class="font-medium text-cream transition-colors group-hover:text-accent">{{ user.username }}</span>
           </div>
         </td>
