@@ -16,3 +16,4 @@
 }
 
 @source "../templates/**/*.html";
+@source inline("opacity-0 translate-y-3 transition-all duration-700");

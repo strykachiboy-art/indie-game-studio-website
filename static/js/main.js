@@ -72,31 +72,76 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ---------- Scroll reveal animations ---------- */
+  // Every page gets the same effect without tagging each element by hand:
+  // blocks inside <main> sections/articles fade up as they scroll into view,
+  // and card grids reveal card by card. Add class "reveal" to force one element,
+  // or data-no-reveal on a wrapper to opt out.
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const revealTargets = document.querySelectorAll(".reveal");
-  if (revealTargets.length && !prefersReducedMotion && "IntersectionObserver" in window) {
-    revealTargets.forEach((el) =>
-      el.classList.add("opacity-0", "translate-y-3", "transition-all", "duration-700")
-    );
+  if (!prefersReducedMotion && "IntersectionObserver" in window) {
+    const found = new Map(); // element -> stagger delay (ms)
+
+    const isWrapper = (el) =>
+      el.tagName === "DIV" && el.classList.contains("mx-auto") && /\bmax-w-/.test(el.className);
+
+    const collect = (parent, delay = 0) => {
+      Array.from(parent.children).forEach((child, i) => {
+        if (child.closest("[data-no-reveal]") || child.matches("script, style, template, [hidden], [aria-hidden='true']")) return;
+        const cs = getComputedStyle(child);
+        if (cs.display === "none" || cs.display === "contents") return;
+        if (cs.position === "absolute" || cs.position === "fixed" || cs.position === "sticky") return;
+
+        if (child.classList.contains("reveal")) { found.set(child, Math.min(i, 5) * 70); return; }
+        if (isWrapper(child)) { collect(child, delay); return; }
+
+        // A plain grid (no border/background) is just layout: reveal its items one by one.
+        const isBareGrid = cs.display === "grid" && child.children.length > 1 &&
+          cs.borderTopWidth === "0px" && cs.backgroundColor === "rgba(0, 0, 0, 0)";
+        if (isBareGrid) { collect(child, delay); return; }
+
+        found.set(child, delay || Math.min(i, 5) * 70);
+      });
+    };
+
+    document.querySelectorAll(".reveal").forEach((el) => { if (!found.has(el)) found.set(el, 0); });
+    document.querySelectorAll("main section, main article").forEach((section) => {
+      if (isWrapper(section) || section.children.length) collect(section);
+    });
+
+    // Never animate both a block and something inside it.
+    const all = Array.from(found.keys());
+    const targets = all.filter((el) => !all.some((other) => other !== el && other.contains(el)));
+
+    targets.forEach((el) => {
+      el.classList.add("opacity-0", "translate-y-3", "transition-all", "duration-700");
+      el.style.transitionDelay = found.get(el) + "ms";
+    });
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove("opacity-0", "translate-y-3");
-            // Drop the slow fade-in duration afterwards so hover effects stay snappy.
-            entry.target.addEventListener(
-              "transitionend",
-              () => entry.target.classList.remove("duration-700"),
-              { once: true }
-            );
-            io.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.remove("opacity-0", "translate-y-3");
+          // Afterwards drop the slow fade + delay so hover effects stay snappy.
+          const delay = parseInt(el.style.transitionDelay, 10) || 0;
+          const cleanup = (e) => {
+            if (e && e.target !== el) return; // ignore transitions bubbling up from children
+            el.classList.remove("duration-700");
+            el.style.transitionDelay = "";
+            el.removeEventListener("transitionend", cleanup);
+          };
+          el.addEventListener("transitionend", cleanup);
+          // Safety net: some browsers skip transitionend (e.g. tab in background).
+          setTimeout(() => cleanup(), delay + 900);
+          io.unobserve(el);
         });
       },
-      { threshold: 0.15 }
+      // threshold 0 + a small bottom margin: tall blocks (long posts) still trigger.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
-    revealTargets.forEach((el) => io.observe(el));
+    targets.forEach((el) => io.observe(el));
   }
+
   /* ---------- Profile: avatar preview + bio counter ---------- */
   const MAX_AVATAR_BYTES = 2 * 1024 * 1024;
   const avatarInput = document.querySelector("[data-avatar-input]");
